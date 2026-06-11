@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 600px;
+            background-color: lightblue;
+            margin: auto;
+            border-radius: 30px;
+        }
+
+        .container-input {
+            width: 600px;
+            height: 300px;
+            background-color: lightyellow;
+            margin: auto;
+            margin-top: 20px;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            border-radius: 30px;
+        }
+
+        .item {
+            width: 150px;
+            height: 150px;
+        }
+
+        .item1 {
+            background-color: lightblue;
+        }
+
+        .item2 {
+            background-color: lightgreen;
+        }
+
+        .item3 {
+            background-color: lightpink;
+        }
+
+        .bg-red {
+            background-color: lightpink;
+        }
+
+        .bg-blue {
+            background-color: lightblue;
+        }
+
+        .bg-green {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+
+    <div class="container-input">
+        <div class="item item1 color-btn" id="blueBtn" data-color="bg-blue"></div>
+        <div class="item item2 color-btn" id="greenBtn" data-color="bg-green"></div>
+        <div class="item item3 color-btn" id="redBtn" data-color="bg-red"></div>
+    </div>
+
+    <script>
+        // 1.bind
+        // 綁定 box
+        let box = document.querySelector('.box');
+
+        // 綁定 redBtn
+        let redBtn = document.querySelector('#redBtn');
+
+        // 綁定 colorBtn
+        let colorBtn = document.querySelectorAll('.color-btn');
+
+        // 綁定 blueBtn
+        // 綁定 greenBtn
+        console.log('box', box);
+        console.log('redBtn', redBtn);
+        console.log('colorBtn', colorBtn);
+
+
+
+        // 2.action
+        // 紅色按鈕 點一下
+        // forEach 方式拆開來
+
+        // value 單一
+        // array 多組
+
+        // colorBtn 多組 
+        // function 的變數 自己命名的
+        // 變數的生命週期 { }
+        colorBtn.forEach(function (btn) {
+            console.log('btn', btn);
+            btn.addEventListener('click', function () {
+                // console.log('this', this);
+                console.log('btn', btn);
+                let getColor = this.getAttribute('data-color');
+                console.log('getColor', getColor);
+
+                // $text = "box $getColor"
+                let tmpText = `box ${getColor}`;
+                console.log('tmpText', tmpText);
+
+                box.setAttribute('class', tmpText);
+            });
+
+        });
+
+
+        // colorBtn.addEventListener('click', function () {
+        //     console.log('this', this);
+
+        //     // // box 變紅色
+        //     // let getColor = this.getAttribute('data-color');
+        //     // console.log('getColor', getColor);
+
+        //     // // $text = "box $getColor"
+        //     // let tmpText = `box ${getColor}`;
+        //     // console.log('tmpText', tmpText);
+
+        //     // box.setAttribute('class', tmpText);
+
+        //     // // box.setAttribute('class', 'box bg-red');
+
+        // });
+
+
+
+
+    </script>
+
+</body>
+
+</html>

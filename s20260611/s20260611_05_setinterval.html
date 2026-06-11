@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: lightblue;
+            margin: auto;
+        }
+
+        .start {
+            width: 300px;
+            height: 100px;
+            background-color: lightyellow;
+            margin: auto;
+        }
+
+        .stop {
+            width: 300px;
+            height: 100px;
+            background-color: lightcoral;
+            margin: auto;
+        }
+
+        .bg-blue {
+            background-color: lightblue;
+        }
+
+        .bg-pink {
+            background-color: lightpink;
+        }
+
+        .display-none {
+            display: none;
+        }
+
+        .display-block {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+    <br>
+    <div class="start"></div>
+    <div class="stop"></div>
+
+
+    <script>
+        // 1.bind
+        let box = document.querySelector(".box");
+        let startBtn = document.querySelector(".start");
+        let stopBtn = document.querySelector(".stop");
+        
+
+        // flag
+        let isPink = false;
+
+        // timer
+        // setInterval() 暫存
+        let timer = null;
+
+
+        // 2.action
+        // stop hidden
+
+        // 1.start visible stop hidden
+        // 2.click start btn , start hidden stop visible
+        // 3.click stop btn , start visible stop hidden
+
+
+
+        // 1.start visible stop hidden
+        stopBtn.setAttribute("class", "stop display-none");
+
+        startBtn.addEventListener('click', function () {
+            // 2.click start btn , start hidden stop visible
+            startBtn.setAttribute("class", "start display-none");
+            stopBtn.setAttribute("class", "stop");
+            
+            // 防呆
+            if (timer) {
+                return false;
+            }
+
+            // hidden
+            // myBtn.style.display = "none";
+
+            // setTimeout(function,時間(毫秒) 時間到 執行function
+            // function 在裡面 不用function name
+            timer = setInterval(function () {
+                console.log('timer', timer);
+                if (isPink) {
+                    box.setAttribute("class", "box bg-blue");
+                    isPink = false;
+                } else {
+                    box.setAttribute("class", "box bg-pink");
+                    isPink = true;
+                }
+            }, 500);
+
+            stopBtn.addEventListener('click', function () {
+                // 3.click stop btn , start visible stop hidden
+                startBtn.setAttribute("class", "start");
+                stopBtn.setAttribute("class", "stop display-none");
+
+                // stop timer
+                if (timer) {
+                    clearInterval(timer);
+                    timer = null;
+                    console.log('timer 已存在');
+                    return false;
+                }
+            });
+
+            // 小練習?
+            // 1. 連續按下去 會一直新增 setInterval ?
+            // 2. stop 停止 setInterval 
+
+
+            // 1.start visible stop hidden
+            // 2.start hidden stop visible
+
+        });
+    </script>
+</body>
+
+</html>

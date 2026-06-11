@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Title</title>
+</head>
+
+<body>
+    <h1>A Heading</h1>
+    <a href="">Link Text</a>
+    <br><br>
+    <img src="images/dom.png" width="30%" alt="Image Description">
+
+    <script>
+        // 1.bind
+        let myTitle = document.querySelector('title');
+        let myH1 = document.querySelector('h1');
+        let myA = document.querySelector('a');
+
+        console.log('myTitle', myTitle);
+        console.log('myH1', myH1);
+        console.log('myA', myA);
+        console.log('document', document);
+        console.log('window.document', window.document);
+        console.log('window', window);
+
+        // 2.action
+        myH1.addEventListener('click', function () {
+            console.log('myH1', myH1);
+            myTitle.textContent = 'Change Title';
+            myH1.textContent = 'Change Heading';
+            myA.textContent = 'Change Link Text';
+            myA.setAttribute('href', 'https://www.w3schools.com/js/js_htmldom.asp');
+        });
+
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

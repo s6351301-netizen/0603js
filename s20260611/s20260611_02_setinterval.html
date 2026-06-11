@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: lightblue;
+            margin: auto;
+        }
+
+        .bg-blue {
+            background-color: lightblue;
+        }
+
+        .bg-pink {
+            background-color: lightpink;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+    <br>
+    <div class="container">
+        <button type="button" id="myBtn">myBtn</button>
+    </div>
+
+
+    <script>
+        // 1.bind
+        let myBtn = document.getElementById("myBtn");
+        let box = document.querySelector(".box");
+
+        // flag
+        let isPink = false;
+
+        console.log('myBtn', myBtn);
+        console.log('box', box);
+
+        // 2.action
+        myBtn.addEventListener('click', function () {
+            console.log('myBtn click ok');
+
+            box.setAttribute("class", "box bg-pink");
+
+            // setTimeout(function,時間(毫秒) 時間到 執行function
+            // function 在裡面 不用function name
+            setInterval(function () {
+                if (isPink) {
+                    box.setAttribute("class", "box bg-blue");
+                    isPink = false;
+                } else {
+                    box.setAttribute("class", "box bg-pink");
+                    isPink = true;
+                }
+            }, 1000);
+
+            // 小練習?
+            // 1. 連續按下去 會一直新增 setInterval ?
+            // 2. stop 停止 setInterval ?
+        });
+    </script>
+</body>
+
+</html>

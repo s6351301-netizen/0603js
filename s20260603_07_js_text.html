@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: lightblue;
+            margin: auto;
+            border-radius: 30px;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <p>
+            <input type="text" id="name"  value="kai"  placeholder="name....">
+        </p>
+        <p>
+            <input type="text" id="text"  value="全力以赴"  placeholder="text....">
+        </p>
+        <p>
+            <button type="button" id="myBtn">myBtn</button>
+        </p>
+
+        <span id="mySpan">我是XXXX , 人生座右銘XXXXX</span>
+    </div>
+
+    <script>
+
+        // 1.bind
+        let myName = document.querySelector('#name');
+        let myText = document.querySelector('#text');
+        let myBtn = document.querySelector('#myBtn');
+        let mySpan = document.querySelector('#mySpan');
+
+        console.log('myName', myName);
+        console.log('myText', myText);
+        console.log('myBtn', myBtn);
+        console.log('mySpan', mySpan);
+
+        // 2.action
+
+        myBtn.addEventListener('click', function () {
+            console.log('myBtn', myBtn);
+            // input.value  properties
+
+            // 1.抓input
+            // 2.組成text
+            // 3.顯示在span
+
+            // 1.抓input
+            let getName = myName.value;
+            let getText = myText.value;
+            console.log('getName', getName);
+            console.log('getText', getText);
+
+            // 2.組成text
+            let tmpText = `我是${getName} , 座右銘${getText}`;
+            console.log('tmpText', tmpText);
+
+            // 3.顯示在span
+            mySpan.innerText = tmpText;
+
+        });
+
+
+    </script>
+</body>
+
+</html>

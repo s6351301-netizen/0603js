@@ -25,24 +25,36 @@
             justify-content: space-around;
             align-items: center;
 
-             border-radius: 30px;
+            border-radius: 30px;
         }
 
-        .item{
+        .item {
             width: 150px;
             height: 150px;
         }
 
-        .item1{
+        .item1 {
             background-color: lightblue;
         }
 
-        .item2{
+        .item2 {
             background-color: lightgreen;
         }
 
-        .item3{
+        .item3 {
             background-color: lightpink;
+        }
+
+        .bg-red {
+            background-color: lightpink;
+        }
+
+        .bg-blue {
+            background-color: lightblue;
+        }
+
+        .bg-green {
+            background-color: lightgreen;
         }
     </style>
 </head>
@@ -53,10 +65,65 @@
     </div>
 
     <div class="container-input">
-        <div class="item item1"></div>
-        <div class="item item2"></div>
-        <div class="item item3"></div>
-    </div>
+        <div class="item item1" id="blueBtn"></div>
+        <div class="item item2" id="greenBtn"></div>
+        <div class="item item3" id="redBtn"></div>
+    </div>0
+
+    <script>
+        // 1.bind
+        // 綁定 box
+        let box = document.querySelector('.box');
+
+        // 綁定 redBtn
+        let redBtn = document.querySelector('#redBtn');
+
+        // 綁定 blueBtn
+        let blueBtn = document.querySelector('#blueBtn');
+
+        // 綁定 greenBtn
+        let greenBtn = document.querySelector('#greenBtn');
+
+
+
+
+
+        // 類似php print_r
+        console.log("Hello JS");
+        console.log(box);
+        console.log(redBtn);
+        console.log(blueBtn);
+        console.log(greenBtn);
+
+        // 2.action
+
+        // 紅色按鈕 點一下
+        redBtn.addEventListener('click', function () {
+            console.log('redBtn ok');
+            // box 變紅色
+            box.setAttribute('class', 'box bg-red');
+        });
+
+
+        // 藍色按鈕 點一下
+        // box 變藍色
+        blueBtn.addEventListener('click', function () {
+            console.log('blueBtn ok');
+            // box 變紅色
+            box.setAttribute('class', 'box bg-blue');
+        });
+
+        // 綠色按鈕 點一下
+        // box 變綠色
+        greenBtn.addEventListener('click', function () {
+            console.log('greenBtn ok');
+            // box 變紅色
+            box.setAttribute('class', 'box bg-green');
+        });
+
+
+    </script>
+
 </body>
 
 </html>

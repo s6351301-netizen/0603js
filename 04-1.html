@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江左世澤-宗族星空神木祈願系統</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* 完美融合：浩瀚星空無限流動背景 */
+        body {
+            background-color: #020308;
+            
+            /* 1. 繪製不同大小、模糊度的白色星點與星雲底色 */
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),  /* 第一層星點 */
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px), /* 第二層星點 */
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),  /* 第三層星點 */
+                radial-gradient(circle at center, #0b1126 0%, #020308 80%);          /* 中央星雲漸層 */
+            
+            /* 2. 定義每層星點的平鋪尺寸 */
+            background-size: 550px 550px, 350px 350px, 250px 250px, 100% 100%;
+            
+            /* 固定背景不隨網頁捲動 */
+            background-attachment: fixed; 
+
+            /* 3. 套用無限流動動畫：時長 60 秒、無限循環、線性勻速 */
+            animation: starStream 60s infinite linear;
+
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0;
+            padding: 40px 20px;
+            font-family: "Noto Serif TC", "Noto Serif CJK TC", "Songti TC", serif;
+            color: #f1e6cd;
+            overflow-x: hidden;
+        }
+
+        /* 4. 控制背景點點移動軌跡的動畫主體 */
+        @keyframes starStream {
+            0% { 
+                background-position: 0 0, 0 0, 0 0, center; 
+            }
+            100% { 
+                /* 讓前三層點點往不同的 X 與 Y 軸座標位移，產生錯開的立體流動感 */
+                background-position: 550px 1100px, -350px 700px, 500px -500px, center; 
+            }
+        }   
+
+        /* 主標題：彰顯宗族氣勢 */
+        .main-title {
+            text-align: center;
+            margin-bottom: 30px;
+            z-index: 10;
+        }
+        .main-title h1 {
+            font-size: 32px;
+            color: #d4af37;
+            letter-spacing: 6px;
+            margin: 0 0 10px 0;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+        }
+        .main-title p {
+            font-size: 14px;
+            color: #a3b8cc;
+            letter-spacing: 3px;
+            margin: 0;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+
+        /* 頂部：祖訓載錄核心卡片 */
+        .box {
+            width: 520px;
+            background-color: rgba(16, 22, 36, 0.92);
+            border-radius: 4px;
+            text-align: center;
+            padding: 35px 32px;
+            border: 4px double #d4af37;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            position: relative;
+            margin-bottom: 40px;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        p { margin: 18px 0; }
+
+        input, button {
+            padding: 12px 18px;
+            font-size: 16px;
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input {
+            width: 85%;
+            border: 1px solid #8a7129;
+            background-color: #fbf9f3;
+            color: #1a1a1a;
+            text-align: center;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            background-color: #ffffff;
+        }
+
+        button {
+            background: linear-gradient(135deg, #7c1a1a 0%, #4a0d0d 100%);
+            color: #f4efe2;
+            border: 1px solid #d4af37;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            width: 75%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 3px;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #962323 0%, #5e1212 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        #mySpan {
+            display: block;
+            margin-top: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2b221a;
+            line-height: 1.8;
+            background-color: #f5f0e1;
+            padding: 12px;
+            border-radius: 2px;
+            border: 1px solid #b89b3c;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ======================================================= */
+        /* 下方獨立區塊：大樹動態祈願牆 */
+        /* ======================================================= */
+        .tree-section {
+            width: 900px;
+            max-width: 100%;
+            background-color: rgba(13, 19, 31, 0.85);
+            border: 1px solid #3a2f14;
+            border-top: 4px solid #d4af37;
+            padding: 40px 30px;
+            box-shadow: 0 25px 55px rgba(0,0,0,0.9);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden; 
+            backdrop-filter: blur(5px);
+        }
+
+        /* 深色神木剪影背景（在星空襯托下更顯神秘崇高） */
+        .tree-background {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 500px;
+            pointer-events: none; 
+            opacity: 0.15; /* 微微調亮，使其在黑星空底色中依舊隱約可見 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            z-index: 1;
+        }
+
+        /* 樹幹 */
+        .tree-trunk {
+            width: 50px;
+            height: 180px;
+            background-color: #d4af37;
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* 樹冠（帶有徐徐搖曳動畫） */
+        .tree-leaves {
+            width: 400px;
+            height: 350px;
+            background: radial-gradient(circle, #d4af37 60%, transparent 62%);
+            border-radius: 50% 50% 45% 45%;
+            filter: blur(2px);
+            position: absolute;
+            bottom: 120px;
+            transform-origin: bottom center;
+            animation: treeSway 8s ease-in-out infinite alternate;
+        }
+
+        .tree-leaves::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 250px;
+            background: radial-gradient(circle, #d4af37 60%, transparent 62%);
+            top: -50px;
+            left: -50px;
+            border-radius: 50%;
+        }
+        .tree-leaves::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 250px;
+            background: radial-gradient(circle, #d4af37 60%, transparent 62%);
+            top: -50px;
+            right: -50px;
+            border-radius: 50%;
+        }
+
+        /* 樹木微風搖曳動畫 */
+        @keyframes treeSway {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.03) rotate(2deg); }
+        }
+
+        .tree-title {
+            text-align: center;
+            font-size: 24px;
+            color: #d4af37;
+            letter-spacing: 4px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 2;
+        }
+        .tree-title::after {
+            content: "";
+            display: block;
+            width: 160px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 10px auto 0 auto;
+        }
+
+        /* 祈願牆木牌容器 */
+        .wish-tree-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            min-height: 260px;
+            padding: 30px;
+            background: rgba(5, 8, 14, 0.7);
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            position: relative;
+            z-index: 2; 
+        }
+
+        /* 古典祈願木牌 */
+        .wish-tag {
+            background-color: #f7f2e4;
+            background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 12px 100%;
+            color: #2a1f15;
+            border: 1px solid #c5a059;
+            border-top: 5px solid #9c2a2a; 
+            padding: 22px 18px 18px 18px;
+            width: 240px;
+            border-radius: 3px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            position: relative;
+            transform-origin: top center; 
+            animation: hangWish 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            text-align: left;
+            transition: transform 0.4s ease, box-shadow 0.3s ease;
+        }
+
+        /* 木牌懸掛繩索意象 */
+        .wish-tag::before {
+            content: "💎";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #d4af37;
+            text-shadow: 0 1px 3px black;
+        }
+        .wish-tag::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 10px;
+            background-color: #d4af37;
+        }
+
+        /* 滑鼠懸停時微晃 */
+        .wish-tag:hover {
+            transform: scale(1.03) rotate(3deg);
+            box-shadow: 0 15px 25px rgba(212, 175, 55, 0.2);
+            background-color: #fffcf5;
+            cursor: pointer;
+        }
+
+        .wish-tag .member-name {
+            font-size: 14px;
+            color: #8c2525;
+            border-bottom: 1px double #c5a059;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .wish-tag .member-content {
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: bold;
+            color: #33271b;
+            word-wrap: break-word;
+        }
+
+        /* 掛上木牌時的彈跳落地起動畫 */
+        @keyframes hangWish {
+            0% {
+                opacity: 0;
+                transform: translateY(-40px) rotate(-8deg) scale(0.8);
+            }
+            60% {
+                transform: translateY(5px) rotate(4deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-title">
+        <h1>江左世澤 袓德流芳</h1>
+        <p>— 派下員袓訓登錄與星空祈願神木 —</p>
+    </div>
+
+    <div class="box">
+        <p>
+            <input type="text" id="name" placeholder="請輸入裔孫（派下員）姓名..." value="王崇德">
+        </p>
+        <p>
+            <input type="text" id="text" placeholder="請輸入祈願內容或遵行袓訓..." value="敦親睦族，祈願合族平安，世代昌盛">
+        </p>
+        <p>
+            <button type="button" id="myBtn">敬誌 登錄並奉掛祈願牆</button>
+        </p>
+
+        <span id="mySpan">現任錄入：裔孫 王崇德 謹誌</span>
+    </div>
+
+    <div class="tree-section">
+        
+        <div class="tree-background">
+            <div class="tree-leaves"></div>
+            <div class="tree-trunk"></div>
+        </div>
+
+        <div class="tree-title">宗族大樹祈願牆</div>
+        
+        <div class="wish-tree-container" id="wishTree">
+            <div class="wish-tag">
+                <div class="member-name">裔孫 林長青 敬誌</div>
+                <div class="member-content">祈願家族子孫各個學業有成，光宗耀祖，繁衍昌盛。</div>
+            </div>
+            <div class="wish-tag">
+                <div class="member-name">裔孫 陳美蘭 敬誌</div>
+                <div class="member-content">惟願母族各房長幼安康，歲歲平安，百業興旺。</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById('name');
+        const textInput = document.getElementById('text');
+        const myBtn = document.getElementById('myBtn');
+        const mySpan = document.getElementById('mySpan');
+        const wishTree = document.getElementById('wishTree');
+
+        myBtn.addEventListener('click', function () {
+            let nameValue = nameInput.value.trim();
+            let textValue = textInput.value.trim();
+
+            if (nameValue === "" || textValue === "") {
+                alert("【系統提示】請務必將派下員姓名與祈願內容填寫完整，以昭誠心。");
+                return;
+            }
+
+            // 1. 更新上方顯示框
+            mySpan.textContent = `最新錄入：裔孫 ${nameValue} 謹誌`;
+
+            // 2. 動態生成高質感祈願木牌
+            const newTag = document.createElement('div');
+            newTag.className = 'wish-tag';
+
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'member-name';
+            nameDiv.textContent = `裔孫 ${nameValue} 敬誌`;
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'member-content';
+            contentDiv.textContent = textValue;
+
+            newTag.appendChild(nameDiv);
+            newTag.appendChild(contentDiv);
+
+            // 將新木牌掛在最前面
+            wishTree.insertBefore(newTag, wishTree.firstChild);
+
+            // 清空輸入框
+            textInput.value = "";
+        });
+    </script>
+</body>
+
+</html>

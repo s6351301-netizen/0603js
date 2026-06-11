@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 600px;
+            background-color: lightblue;
+            margin: auto;
+            border-radius: 30px;
+        }
+
+        .container-input {
+            width: 600px;
+            height: 300px;
+            background-color: lightyellow;
+            margin: auto;
+            margin-top: 20px;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            border-radius: 30px;
+        }
+
+        .item {
+            width: 150px;
+            height: 150px;
+        }
+
+        .item1 {
+            background-color: lightblue;
+        }
+
+        .item2 {
+            background-color: lightgreen;
+        }
+
+        .item3 {
+            background-color: lightpink;
+        }
+
+        .bg-red {
+            background-color: lightpink;
+        }
+
+        .bg-blue {
+            background-color: lightblue;
+        }
+
+        .bg-green {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+
+    <div class="container-input">
+        <div class="item item1 color-btn" id="blueBtn" data-color="bg-blue"></div>
+        <div class="item item2 color-btn" id="greenBtn" data-color="bg-green"></div>
+        <div class="item item3 color-btn" id="redBtn" data-color="bg-red"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        // jquery 語法
+        $(document).ready(function () {
+
+            // 1.bind
+            let box = $('.box');
+            let redBtn = $('#redBtn');
+            let blueBtn = $('#blueBtn');
+            let greenBtn = $('#greenBtn');
+            let colorBtn = $('.color-btn');
+
+            console.log('box', box);
+            console.log('redBtn', redBtn);
+            console.log('blueBtn', blueBtn);
+            console.log('greenBtn', greenBtn);
+            console.log('colorBtn', colorBtn);
+
+
+
+            // 2.action
+            // id -> class ?
+            // 原生js querySelectorAll 要使用forEach 才能addEventListener
+            // jquery 不需要 class.click 直接使用
+
+            colorBtn.click(function () {
+                console.log('colorBtn ok');
+                // this 當下click的是哪一個
+                console.log('this', this);
+                let getColor = $(this).attr('data-color');
+                console.log('getColor', getColor);
+                let tmpText = `box ${getColor}`;
+                console.log('tmpText', tmpText);
+                box.attr('class', tmpText);
+                // box.attr('class', 'box bg-red');
+            });
+
+
+            // id
+            // redBtn.click(function () {
+            //     console.log('redBtn ok');
+            //     box.attr('class', 'box bg-red');
+            // });
+
+        });
+    </script>
+
+</body>
+
+</html>

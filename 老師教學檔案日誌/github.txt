@@ -1,0 +1,5 @@
+第一次下載使用git clone
+git clone https://github.com/chengkk0910/web2026-04-22.git
+
+
+後續都是使用git pull

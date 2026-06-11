@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宗族大樹祈願牆 - 飲水思源 • 世代感恩</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 全域樣式 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Noto Serif TC", "PingFang TC", serif;
+            background: linear-gradient(to bottom, #fcf8f2, #eaddca, #cbbba0);
+            color: #4a3c31;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        /* 頁首與家族大樹意象 */
+        header {
+            text-align: center;
+            padding: 50px 20px 20px;
+            max-width: 800px;
+            animation: fadeInDown 1.2s ease;
+        }
+        header h1 {
+            font-size: 2.8rem;
+            color: #1b4332; 
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+        header p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #5c4d41;
+        }
+
+        /* 數據統計：增加宗族向心力 */
+        .counter-box {
+            margin-top: 15px;
+            font-size: 1rem;
+            background: rgba(27, 67, 50, 0.1);
+            padding: 6px 18px;
+            border-radius: 20px;
+            display: inline-block;
+            color: #1b4332;
+            font-weight: bold;
+        }
+        .counter-box span {
+            font-size: 1.3rem;
+            color: #b7094c;
+            margin: 0 4px;
+        }
+
+        /* 裝飾線條 */
+        .tree-spine {
+            width: 6px;
+            background: linear-gradient(to bottom, #1b4332, #402e26);
+            height: 60px;
+            border-radius: 3px;
+            margin: 20px auto;
+        }
+
+        /* ================= 互動輸入表單 ================= */
+        .wish-form-container {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid #e0d5c1;
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 10px 30px rgba(92, 77, 65, 0.15);
+            margin-bottom: 50px;
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 1s ease;
+        }
+        .form-title {
+            font-size: 1.3rem;
+            color: #1b4332;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid #1b4332;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        label {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            color: #5c4d41;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: #fdfcf7;
+            transition: all 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1b4332;
+            box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.15);
+            background-color: #fff;
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        /* 送出按鈕動態效果 */
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #2d6a4f, #1b4332);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(27, 67, 50, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(27, 67, 50, 0.4);
+            filter: brightness(1.1);
+        }
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* ================= 祈願牆主體 ================= */
+        .wish-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        /* 祈願卡片升級與懸浮動態 */
+        .wish-card {
+            background: #ffffff;
+            border-top: 6px solid #2d6a4f; /* 頂部綠色象徵樹葉下垂掛置 */
+            border-radius: 4px 4px 12px 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(64, 46, 38, 0.08);
+            position: relative;
+            background-image: linear-gradient(#fbf9f5 1px, transparent 1px);
+            background-size: 100% 24px; /* 內頁便簽橫線感 */
+            transform-origin: top center; /* 以頂部為支點擺動 */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s;
+        }
+
+        /* 隨機懸掛的動態擺動效果 (由 JS 觸發不同旋轉角度) */
+        .wish-card:hover {
+            transform: scale(1.05) rotate(0deg) !important; /* 滑過時放大並回正 */
+            box-shadow: 0 15px 30px rgba(64, 46, 38, 0.2);
+            z-index: 10;
+        }
+
+        /* 卡片上方的小木夾/掛勾意象 */
+        .wish-card::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: #a67c52;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* 新增卡片時的流暢誕生動畫 */
+        .new-card-animate {
+            animation: dropIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* 卡片內文 */
+        .wish-content {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #2b2520;
+            margin-bottom: 20px;
+            min-height: 70px;
+            white-space: pre-line;
+        }
+
+        /* 署名與世代區 */
+        .wish-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            border-top: 1px dashed #d3c2b0;
+            padding-top: 12px;
+        }
+        .wish-author {
+            font-weight: bold;
+            color: #402e26;
+        }
+        .wish-generation {
+            background-color: #e8f5e9;
+            color: #1b4332;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* ================= 動態效果 Keyframes ================= */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes dropIn {
+            from { opacity: 0; transform: scale(0.6) translateY(-50px) rotate(-10deg); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* 頁尾 */
+        footer {
+            margin-top: auto;
+            width: 100%;
+            background-color: #1b4332;
+            color: #fcf8f2;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>林氏宗族大樹祈願牆</h1>
+        <p>「一柱鋤頭落地開，千重稻浪代代傳。」<br>感念先祖渡海來台、世代務農。在此寫下您對祖先的感念或對家族的期許，讓思源之葉繁茂大樹。</p>
+        <div class="counter-box">目前已有 <span id="wishCount">0</span> 枝子孫祈願葉</div>
+        <div class="tree-spine"></div>
+    </header>
+
+    <div class="wish-form-container">
+        <div class="form-title">🍁 撰寫新的祈願卡</div>
+        <form id="wishForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="author">您的姓名/稱呼</label>
+                    <input type="text" id="author" placeholder="例如：大房 國華" required>
+                </div>
+                <div class="form-group">
+                    <label for="generation">世代輩分</label>
+                    <select id="generation" required>
+                        <option value="" disabled selected>請選擇輩分</option>
+                        <option value="來台第五代">來台第五代 (常字輩)</option>
+                        <option value="來台第六代">來台第六代 (顯字輩)</option>
+                        <option value="來台第七代">來台第七代 (榮字輩)</option>
+                        <option value="來台第八代">來台第八代 (昌字輩)</option>
+                        <option value="來台第九代">來台第九代 (後輩)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="content">寫給祖先的話 / 家族祈願</label>
+                <textarea id="content" placeholder="請寫下您對先祖默默耕耘的感念，或是對林氏後代子孫的祝福..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">將祈願卡掛上大樹 ➔</button>
+        </form>
+    </div>
+
+    <div class="wish-wall" id="wishWall"></div>
+
+    <footer>
+        林氏宗族後代子孫 敬立 • 歲時感恩牆
+    </footer>
+
+    <script>
+        // 預設的初始資料
+        const initialWishes = [
+            {
+                author: "長房大堂哥 國華",
+                generation: "來台第六代",
+                content: "感念曾祖父當年用一雙長滿繭的手，一鋤一鋤地在這片荒地挖出水田。如今我們雖然不再務農，但那份刻苦耐勞、腳踏實地的家風，我一定會繼續傳給下一代。"
+            },
+            {
+                author: "二房 佩芬",
+                generation: "來台第六代",
+                content: "小時候總聽阿公說『吃米擔水要思源』。長大後進了都市工作，每當遇到挫折，想到祖先們當年渡海與對抗天災的堅韌，就覺得自己充滿力量。謝謝您們留給我們最肥沃的精神精神！"
+            },
+            {
+                author: "三房 志明",
+                generation: "來台第七代",
+                content: "每到秋收時節，看著金黃色的稻浪，就彷彿看見公媽們微笑的臉龐。願林氏家族就像這棵大樹一樣，根深蒂固，子孫在各行各業都能開花結果，平安順遂。"
+            }
+        ];
+
+        // 渲染單張卡片的函式
+        function createCardElement(author, generation, content, isNew = false) {
+            const card = document.createElement('div');
+            card.className = 'wish-card';
+            if (isNew) {
+                card.classList.add('new-card-animate'); // 如果是剛輸入的，加上誕生動畫
+            }
+
+            // 讓卡片產生 -4 到 4 度之間隨機微幅旋轉，模擬真實懸掛木籤的不規則感
+            const randomRotate = (Math.random() * 8 - 4).toFixed(1);
+            card.style.transform = `rotate(${randomRotate}deg)`;
+
+            card.innerHTML = `
+                <div class="wish-content">「${content}」</div>
+                <div class="wish-meta">
+                    <span class="wish-author">${author}</span>
+                    <span class="wish-generation">${generation}</span>
+                </div>
+            `;
+            return card;
+        }
+
+        // 更新計數器
+        function updateCounter() {
+            const total = document.getElementById('wishWall').children.length;
+            document.getElementById('wishCount').innerText = total;
+        }
+
+        // 頁面初始化：載入預設資料
+        function initWall() {
+            const wallContainer = document.getElementById('wishWall');
+            initialWishes.forEach(wish => {
+                const card = createCardElement(wish.author, wish.generation, wish.content, false);
+                wallContainer.appendChild(card);
+            });
+            updateCounter();
+        }
+
+        // 監聽表單送出事件（互動核心）
+        document.getElementById('wishForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // 防止網頁重整
+
+            // 取得使用者輸入的值
+            const authorInput = document.getElementById('author').value;
+            const genSelect = document.getElementById('generation').value;
+            const contentInput = document.getElementById('content').value;
+
+            const wallContainer = document.getElementById('wishWall');
+
+            // 建立新卡片（開啟全新動畫效果）
+            const newCard = createCardElement(authorInput, genSelect, contentInput, true);
+            
+            // 將新卡片插入到最前面（最顯眼的位置）
+            wallContainer.insertBefore(newCard, wallContainer.firstChild);
+
+            // 更新總卡片數量
+            updateCounter();
+
+            // 滾動畫面讓新卡片對齊視窗，並清空表單
+            newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            document.getElementById('wishForm').reset();
+        });
+
+        // 網頁準備好就執行
+        window.addEventListener('DOMContentLoaded', initWall);
+    </script>
+</body>
+</html>

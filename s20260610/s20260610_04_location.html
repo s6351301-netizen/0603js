@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>JavaScript Location</h2>
+
+
+    <button type="button" id="myBtn">myBtn</button>
+
+    <script>
+
+        // 1.bind
+        let myBtn = document.getElementById("myBtn");
+
+        console.log('myBtn', myBtn);
+        console.log('window', window);
+        console.log('window.location', window.location);
+
+        // 2.action
+        myBtn.addEventListener('click', function () {
+
+            // python 轉址
+            // return redirect("https://www.google.com")
+
+            // laravel 轉址
+            // return redirect()->to("https://www.google.com");
+
+            // java 轉址
+            // response.sendRedirect("https://www.google.com");
+
+            // c++ 轉址
+            // redirect("https://www.google.com");
+
+            // c# 轉址
+            // redirect("https://www.google.com");
+
+            // php 轉址
+            // header("Location: https://www.google.com");
+
+            // js 轉址
+
+            // location.href  properties 可以回上一頁
+            // window.location.href = "https://www.google.com";
+            // window.location = "https://www.google.com";
+
+            // aasign() method 回上一頁
+            // window.location.assign("https://www.google.com");
+
+            // replace() method 不能回上一頁
+            window.location.replace("https://www.google.com");
+
+        });
+
+    </script>
+
+</body>
+
+</html>
