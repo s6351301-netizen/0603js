@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>午後時光 - 甜點導覽</title>
+    <style>
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: #fff5f5;
+            margin: 0;
+            padding: 30px;
+        }
+
+        /* 主表格樣式 */
+        table {
+            width: 95%;
+            max-width: 1100px;
+            margin: auto;
+            border-collapse: separate;
+            border-spacing: 15px;
+            table-layout: fixed;
+        }
+
+        /* Box 通用樣式 */
+        td {
+            height: 28vh;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: #ffffff;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            border: none;
+        }
+
+        /* 圖片填滿設定 */
+        .dessert-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        td:hover .dessert-img {
+            transform: scale(1.1);
+        }
+
+        /* 底部標籤 */
+        .label {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            color: #d63384;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            font-size: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* 第一層專用：程式碼顯示區 */
+        .code-snippet {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            z-index: 5;
+            pointer-events: none;
+            line-height: 1.4;
+        }
+
+        /* 各區塊背景色備份 */
+        .box11 {
+            background-color: #3e2723;
+        }
+
+        /* 深巧克力色 */
+        .box21 {
+            background-color: #fce4ec;
+        }
+
+        .box22 {
+            background-color: #fff9c4;
+        }
+
+        .box31 {
+            background-color: #e8f5e9;
+        }
+
+        .box32 {
+            background-color: #f3e5f5;
+        }
+
+        .box33 {
+            background-color: #fff3e0;
+        }
+
+        .box41 {
+            background-color: #eceff1;
+        }
+
+        .box42 {
+            background-color: #fffde7;
+        }
+
+        /* 檸檬淺黃 */
+        .box43 {
+            background-color: #e1f5fe;
+        }
+
+        .box44 {
+            background-color: #f1f8e9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table>
+        <!-- 第一層：1 個 BOX (更換為巧克力 + 修正路徑) -->
+        <tr>
+            <td colspan="12" class="box11">
+                <div> class="code-snippet">
+
+                </div>
+                <img src="https://images.unsplash.com/photo-1548907040-4baa42d10919?q=80&w=1000" class="dessert-img"
+                    alt="頂級黑巧克力">
+                <div class="label" style="color: #fff; background: rgba(62, 39, 35, 0.8);">首選介紹：醇厚黑巧克力工藝</div>
+            </td>
+        </tr>
+
+        <!-- 第二層：2 個 BOX -->
+        <tr>
+            <td colspan="6" class="box21">
+                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=600" class="dessert-img"
+                    alt="草莓蛋糕">
+                <div class="label">經典草莓奶油蛋糕</div>
+            </td>
+            <td colspan="6" class="box22">
+                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=600" class="dessert-img"
+                    alt="甜甜圈">
+                <div class="label">糖霜手工甜甜圈</div>
+            </td>
+        </tr>
+
+        <!-- 第三層：3 個 BOX -->
+        <tr>
+            <td colspan="4" class="box31">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=400" class="dessert-img"
+                    alt="巧克力蛋糕">
+                <div class="label">熔岩巧克力蛋糕</div>
+            </td>
+            <td colspan="4" class="box32">
+                <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=400" class="dessert-img"
+                    alt="提拉米蘇">
+                <div class="label">義式提拉米蘇</div>
+            </td>
+            <td colspan="4" class="box33">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=400" class="dessert-img"
+                    alt="水果塔">
+                <div class="label">季節綜合水果塔</div>
+            </td>
+        </tr>
+
+        <!-- 第四層：4 個 BOX (更換檸檬派 + 修正路徑) -->
+        <tr>
+            <td colspan="3" class="box41">
+                <img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?q=80&w=300" class="dessert-img"
+                    alt="可麗露">
+                <div class="label">波爾多可麗露</div>
+            </td>
+            <td colspan="3" class="box42">
+                <!-- 修正：更換為檸檬派並補上連結 -->
+                <img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&q=80&w=300"
+                    class="dessert-img" alt="檸檬派">
+                <div class="label">法式清爽檸檬派</div>
+            </td>
+            <td colspan="3" class="box43">
+                <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?q=80&w=300" class="dessert-img"
+                    alt="杯子蛋糕">
+                <div class="label">絲絨杯子蛋糕</div>
+            </td>
+            <td colspan="3" class="box44">
+                <img src="https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?q=80&w=300" class="dessert-img"
+                    alt="布丁">
+                <div class="label">焦糖烤布蕾</div>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

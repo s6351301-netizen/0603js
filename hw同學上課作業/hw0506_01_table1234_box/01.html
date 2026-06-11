@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Layout</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 12px;
+            background-color: #1e222b;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .row {
+            display: flex;
+            flex: 1;
+            gap: 12px;
+        }
+        .block {
+            display: flex;
+            flex: 1;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .blue { background-color: #4682B4; }
+        .brown { background-color: #8B5A2B; }
+        .magenta-side { background-color: #A066A6; }
+        .magenta-center { background-color: #A066A6; flex: 3; }
+        .green { background-color: #6E8B7E; }
+    </style>
+</head>
+<body>
+
+    <div class="row">
+        <div class="block blue"></div>
+    </div>
+
+    <div class="row">
+        <div class="block brown"></div>
+        <div class="block brown"></div>
+    </div>
+
+    <div class="row">
+        <div class="block magenta-side"></div>
+        <div class="block magenta-center"></div>
+        <div class="block magenta-side"></div>
+    </div>
+
+    <div class="row">
+        <div class="block green"></div>
+        <div class="block green"></div>
+        <div class="block green"></div>
+        <div class="block green"></div>
+    </div>
+
+</body>
+</html>

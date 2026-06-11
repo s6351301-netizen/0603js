@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉伊卡哇常設店 - 旅 の 記憶</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcf8f8;
+            --card-bg: #ffffff;
+            --accent-pink: #ffb6c1;
+            --accent-dusty: #e0b0b0;
+            --text-dark: #3a3a3a;
+            --text-muted: #777777;
+            --border-light: #f0f0f0;
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans TC', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 0;
+            padding-bottom: 80px;
+        }
+
+        /* --- 返回導航 --- */
+        .back-nav {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto 20px;
+        }
+
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: all 0.3s var(--ease);
+        }
+
+        .back-to-home:hover {
+            color: var(--accent-dusty);
+            transform: translateX(-5px);
+        }
+
+        /* --- 內容容器 (這裡恢復成一個完整的卡片) --- */
+        .article-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg); /* 白色背景 */
+            border-radius: 20px;       /* 圓角 */
+            overflow: hidden;         /* 關鍵：這會裁切內部的圖片頂部圓角 */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03); /* 整體陰影 */
+        }
+
+        /* 頂部大圖區 */
+        .hero-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            margin-bottom: 0;         /* 移除下方間距，讓它跟文字貼合 */
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;           /* 移除圖片下方的細微空隙 */
+        }
+
+        /* 文字區塊樣式調整 */
+        .article-main-card {
+            background: transparent;  /* 改為透明，因為外層 container 已經是白色了 */
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .article-content {
+            padding: 50px 60px;
+        }
+
+        .article-meta {
+            font-size: 0.8rem;
+            color: var(--accent-pink);
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 2.2rem;
+            margin: 0 0 30px;
+            color: var(--text-dark);
+        }
+
+        .character-intro {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #fffafa;
+            border-radius: 15px;
+            border: 1px dashed var(--accent-pink);
+        }
+
+        .main-text {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .cute-divider {
+            text-align: center;
+            margin: 40px 0;
+            color: var(--accent-pink);
+            font-size: 1.2rem;
+            letter-spacing: 10px;
+        }
+
+        .info-box {
+            background-color: #fafafa;
+            border-left: 4px solid var(--accent-pink);
+            padding: 25px;
+            border-radius: 4px 12px 12px 4px;
+            margin-top: 50px;
+        }
+
+        .info-title {
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .info-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 35px;
+            background-color: var(--accent-pink);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s var(--ease);
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .article-content { padding: 30px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="back-nav">
+        <a href="../20260429_06_food.html" class="back-to-home">
+            <span class="arrow">←</span> BACK TO JOURNEY
+        </a>
+    </nav>
+
+    <main class="article-container">
+        <div class="hero-image">
+            <img src="./img/21.jpg" alt="吉伊卡哇台北常設店">
+        </div>
+
+        <div class="article-main-card">
+            <div class="article-content">
+                <span class="article-meta">POP-UP ‧ SHOPPING ‧ KAWAII</span>
+                <h1>吉伊卡哇台北常設店：走進療癒的小可愛世界</h1>
+
+                <p class="main-text">
+                    風靡全球的漫畫《吉伊卡哇》（Chiikawa）在台北開設了官方常設店！這裡不僅是粉絲們的購物天堂，更是一個充滿幸福感的空間。從進入店內的那一刻起，就能看見吉伊卡哇、小八貓（Hachiware）和兔兔（Usagi）迎接大家的到來。
+                    <br><br>
+                    店內裝潢完美還原了漫畫中的溫馨氛圍，除了各式各樣的絨毛娃娃、生活文具與限定小物外，還有許多適合拍照打卡的精緻角落。無論是想尋找那份純粹的快樂，還是想帶走可愛的周邊，這裡絕對能讓你流連忘返。
+                </p>
+
+                <div class="cute-divider">🌸🌸🌸</div>
+
+                <div class="character-intro">
+                    <p style="margin: 0; font-size: 0.95rem; color: var(--text-dark);">
+                        <strong>💡 逛店小撇步：</strong><br>
+                        常設店人氣極高，建議在假日前往時先確認是否需要領取號碼牌。除了架上的周邊，也要多留意店內的牆面與吊飾，藏有很多漫畫中的小細節喔！
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <span class="info-title">店舖資訊</span>
+                    <ul class="info-list">
+                        <li>📍 地點：台北市（請依官方最新公告地點為準）</li>
+                        <li>⏰ 營業時間：依百貨或商場營業時間而定</li>
+                        <li>💖 亮點：官方限定商品、療癒拍照空間、角色齊全</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/吉伊卡哇常設店" target="_blank" class="action-btn">📍 導航去尋找小可愛</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

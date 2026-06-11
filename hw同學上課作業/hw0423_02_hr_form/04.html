@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        fieldset {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        legend {
+            font-size: 1.5em;
+            color: #2b0105;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        input[type="file"]:focus,
+        textarea:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        input[type="radio"]+label,
+        input[type="checkbox"]+label {
+            display: inline;
+            font-weight: normal;
+            margin-right: 20px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            text-align: left;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            fieldset {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="">
+        <fieldset>
+
+            <p>
+                <legend>資料表單練習</legend>
+                <br>
+                <br>
+                <!-- for -> id -->
+                <!-- id 唯一 -->
+                <!-- text -->
+                <label for="name">名字</label>
+                <input type="text" name="" id="name" value="" placeholder="請輸入姓名">
+            </p>
+            <p>
+                <label for="count">年齡</label>
+                <input type="number" name="" id="count" min="0" max="100">
+            </p>
+            <!-- 單選 radio -->
+            <!-- name 長一樣 -->
+            <p>
+                <label for="gender">三餐</label>
+                <input type="radio" name="gender" value="早">早
+                <input type="radio" name="gender" value="午">午
+                <input type="radio" name="gender" value="晚餐">晚餐
+            </p>
+            <!-- 多選 checkbox -->
+            <!-- 多選的name 送到後端 [] 陣列 -->
+            <p>
+                <label for="">請選擇你的交通工具</label> <br>
+                <input type="checkbox" id="vehicle1" name="vehicle[]" value="Bike">
+                <label for="vehicle1"> 機車</label><br>
+                <input type="checkbox" id="vehicle2" name="vehicle[]" value="Car">
+                <label for="vehicle2"> 汽車</label><br>
+                <input type="checkbox" id="vehicle3" name="vehicle[]" value="Boat">
+                <label for="vehicle3"> 自行車</label>
+            </p>
+
+            <p>
+                <!-- input date -->
+                <label for="date">日期</label>
+                <input type="date" name="" id="date">
+            </p>
+
+            <p>
+                <!-- file -->
+                <!-- <label for="">上傳檔案</label> -->
+                <input type="file" name="" id="">
+            </p>
+
+            <p>
+                <!-- 留言板 -->
+                <label for="murmur">備註</label> <br>
+                <textarea name="" id="murmur" rows="4" cols="50">
+
+            </textarea>
+            </p>
+
+            <p>
+                <input type="submit" value="送出">
+            </p>
+        </fieldset>
+
+    </form>
+</body>
+
+</html>

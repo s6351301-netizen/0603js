@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食介紹 - 喜歡的餐廳</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe0cc 50%, #ffd9b3 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 2.8em;
+            color: #c85a17;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header p {
+            font-size: 1.1em;
+            color: #8b5a2b;
+            opacity: 0.9;
+        }
+
+        .restaurants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .restaurant-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(200, 90, 23, 0.15);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(200, 90, 23, 0.25);
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffe0cc, #ffd9b3);
+        }
+
+        .restaurant-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .restaurant-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .rating-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ffa500, #ff8c00);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9em;
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            color: #ffd700;
+            font-size: 0.9em;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .restaurant-name {
+            font-size: 1.6em;
+            color: #c85a17;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .cuisine-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            color: #d63031;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #5f4d42;
+            font-size: 0.95em;
+            line-height: 1.7;
+            margin-bottom: 18px;
+            min-height: 100px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-website {
+            background: linear-gradient(135deg, #c85a17, #a0440d);
+            color: white;
+        }
+
+        .btn-website:hover {
+            transform: translateX(3px);
+            box-shadow: 0 8px 20px rgba(200, 90, 23, 0.35);
+        }
+
+        .btn-map {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+        }
+
+        .btn-map:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.35);
+        }
+
+        .map-container {
+            display: none;
+        }
+
+        .map-container.active {
+            display: block;
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        /* 動畫 */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2em;
+            }
+
+            .restaurants-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 20px;
+            color: #8b5a2b;
+            opacity: 0.9;
+        }
+
+        .container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .text-box {
+            text-align: justify;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-header">
+        <h1>🍽️ 我最愛的餐廳</h1>
+        <p>發現美食的故事，享受餐飲的風景</p>
+    </div>
+
+    <div class="restaurants-grid">
+        <!-- 餐廳 1: 金蓬萊 -->
+        <div class="restaurant-card">
+            <div class="image-container">
+                <img src="./img/金蓬萊.png" alt="金蓬萊遵古台菜餐廳">
+                <div class="rating-badge">
+                    <span class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </span>
+                    5.0
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="restaurant-name">金蓬萊遵古台菜餐廳</h2>
+                <div class="cuisine-tags">
+                    <span class="tag">🇹🇼 台菜</span>
+                    <span class="tag">🏛️ 經典</span>
+                    <span class="tag">👨‍🍳 高級</span>
+                </div>
+                <p class="description">
+                    2009年，第二代料理人陳博璿接棒，將金蓬萊推至新高峰。新餐廳時尚中兼有東方典雅，推出清爽不膩的創意料理。六十多年來的原汁原味與精神灌注在每一道菜，歡迎您來喚醒記憶中的老味道。
+                </p>
+                <div class="action-buttons">
+                    <a href="http://www.goldenformosa.com.tw/bin/home.php" target="_blank" class="btn btn-website">
+                        🌐 官網預約
+                    </a>
+                    <button class="btn btn-map" onclick="toggleMap(this)">
+                        📍 查看地圖
+                    </button>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.514243189081!2d121.53367141171324!3d25.11829957766909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ae7fe527654f%3A0x943ba6a9916744a7!2z6YeR6JOs6JCK6YG15Y-k5Y-w6I-c6aSQ5buz!5e0!3m2!1szh-TW!2stw!4v1777441350310!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 餐廳 2: MaoInn Steak -->
+        <div class="restaurant-card">
+            <div class="image-container">
+                <img src="https://maoinn.tw/wp-content/uploads/2022/11/og_img.jpg" alt="MaoInn Steak 錨隱廚牛排館">
+                <div class="rating-badge">
+                    <span class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </span>
+                    4.9
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="restaurant-name">MaoInn Steak - 錨隱廚</h2>
+                <div class="cuisine-tags">
+                    <span class="tag">🥩 高級牛排</span>
+                    <span class="tag">🦞 龍蝦</span>
+                    <span class="tag">🍷 餐酒館</span>
+                </div>
+                <p class="description">
+                    Hygge 丹麥語中簡單美好的生活。瀰漫著餐、酒、花、書的氛圍，承襲經典極致厚切牛排與鮮活龍蝦饗宴，盡情享受約會、慶生、宴客的美好時光。
+                </p>
+                <div class="action-buttons">
+                    <a href="https://maoinn.tw/" target="_blank" class="btn btn-website">
+                        🌐 官網預約
+                    </a>
+                    <button class="btn btn-map" onclick="toggleMap(this)">
+                        📍 查看地圖
+                    </button>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.7502049620784!2d121.52681151171319!3d25.110315777674288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442af14de29c40d%3A0x22f4025c3d3cc1c!2zTWFvSW5uIFN0ZWFrIOmMqOmareW7mueJm-aOkum-jeidpumkkOmFkumkqA!5e0!3m2!1szh-TW!2stw!4v1777441394264!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- 餐廳 3: 屋頂上的貓 -->
+        <div class="restaurant-card">
+            <div class="image-container">
+                <img src="./img/屋頂上的貓.png" alt="屋頂上的貓 私廚">
+                <div class="rating-badge">
+                    <span class="stars">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">☆</span>
+                    </span>
+                    4.8
+                </div>
+            </div>
+            <div class="card-content">
+                <h2 class="restaurant-name">屋頂上的貓 私廚</h2>
+                <div class="cuisine-tags">
+                    <span class="tag">👨‍🍳 私廚體驗</span>
+                    <span class="tag">🎨 藝文氛圍</span>
+                    <span class="tag">💝 精緻料理</span>
+                </div>
+                <p class="description">
+                    一樓庭園住宅入口溫馨有藝術家氣息，兩位主廚 Roy & Pong Pong 為客人準備精心料理。用餐空間分開招待不同客人，是一間以家庭溫暖打造的私廚，讓您體驗烹飪者的心意與堅持。
+                </p>
+                <div class="action-buttons">
+                    <a href="https://rflower3f.blogspot.com/" target="_blank" class="btn btn-website">
+                        🌐 查看更多
+                    </a>
+                    <button class="btn btn-map" onclick="toggleMap(this)">
+                        📍 查看地圖
+                    </button>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28920.776469965174!2d121.52026311337394!3d25.030780024436734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb8567fa105%3A0xe2fbf982524598bd!2z5bGL6aCC5LiK55qE6LKT56eB5bua!5e0!3m2!1szh-TW!2stw!4v1777441435904!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>✨ 每家餐廳都有獨特的故事和風味，期待您親自去品嚐 ✨</p>
+    </footer>
+
+    <script>
+        function toggleMap(button) {
+            const mapContainer = button.parentElement.nextElementSibling;
+            const isActive = mapContainer.classList.contains('active');
+            
+            // 關閉所有其他的地圖
+            document.querySelectorAll('.map-container.active').forEach(map => {
+                if (map !== mapContainer) {
+                    map.classList.remove('active');
+                }
+            });
+            
+            // 切換當前地圖
+            if (isActive) {
+                mapContainer.classList.remove('active');
+                button.textContent = '📍 查看地圖';
+            } else {
+                mapContainer.classList.add('active');
+                button.textContent = '📍 收起地圖';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
+    
+
+</body>
+
+</html>

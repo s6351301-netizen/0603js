@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>旅 の 記憶 ‧ 景點與美食攝影集</title>
+     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Satisfy&display=swap"
+          rel="stylesheet">
+     <style>
+          :root {
+               --bg-color: #fcf8f8;
+               /* 極淡的米粉色，比純白更溫柔 */
+               --card-bg: #ffffff;
+               /* 卡片背景 */
+               --accent-pink: #ffb6c1;
+               /* 櫻花粉 (點綴用) */
+               --accent-dusty: #e0b0b0;
+               /* 灰粉色 (文字用) */
+               --text-dark: #3a3a3a;
+               /* 深灰色，比純黑溫柔 */
+               --text-muted: #777777;
+               /* 淡灰色文字 */
+               --border-light: #f0f0f0;
+               /* 極淡的分割線 */
+               --ease: cubic-bezier(0.23, 1, 0.32, 1);
+               /* 專業的平滑貝茲曲線 */
+          }
+
+          body {
+               background-color: var(--bg-color);
+               font-family: 'Noto Sans TC', "Microsoft JhengHei", sans-serif;
+               color: var(--text-dark);
+               line-height: 1.8;
+               margin: 0;
+               display: flex;
+               flex-direction: column;
+               min-height: 100vh;
+               /* 抗鋸齒設定，讓字體更清晰 */
+               -webkit-font-smoothing: antialiased;
+               -moz-osx-font-smoothing: grayscale;
+          }
+
+          /* --- 頁首導航 (新增，增加質感) --- */
+          header {
+               width: 90%;
+               max-width: 1000px;
+               margin: 0 auto;
+               padding: 20px 0;
+               border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+          }
+
+          .site-logo {
+               font-family: 'Satisfy', cursive;
+               /* 使用手寫體 */
+               font-size: 1.8rem;
+               color: var(--accent-dusty);
+               text-decoration: none;
+          }
+
+          /* --- 標題區塊美化 --- */
+          .header-section {
+               text-align: center;
+               padding: 80px 20px 40px;
+          }
+
+          .sub-title {
+               display: block;
+               font-size: 0.75rem;
+               color: var(--accent-dusty);
+               letter-spacing: 6px;
+               text-transform: uppercase;
+               margin-bottom: 15px;
+               font-weight: 300;
+          }
+
+          h1 {
+               font-family: 'Noto Serif TC', serif;
+               font-size: 2.2rem;
+               color: var(--text-dark);
+               margin: 0;
+               font-weight: 600;
+               letter-spacing: 2px;
+          }
+
+          h1 small {
+               display: block;
+               font-size: 1rem;
+               font-weight: 300;
+               color: #999;
+               margin-top: 10px;
+               font-family: 'Noto Sans TC', sans-serif;
+          }
+
+          /* 分類篩選按鈕 (視覺美化) */
+          .filter-container {
+               display: flex;
+               justify-content: center;
+               gap: 10px;
+               margin: 40px 0 20px;
+          }
+
+          .filter-btn {
+               background: var(--card-bg);
+               border: 1px solid var(--border-light);
+               color: #888;
+               padding: 8px 20px;
+               cursor: pointer;
+               font-size: 0.85rem;
+               transition: all 0.4s var(--ease);
+               border-radius: 30px;
+               /* 全圓角 */
+               letter-spacing: 1px;
+          }
+
+          .filter-btn.active {
+               color: #fff;
+               background-color: var(--accent-dusty);
+               border-color: var(--accent-dusty);
+               box-shadow: 0 4px 12px rgba(224, 176, 176, 0.3);
+          }
+
+          .filter-btn:hover:not(.active) {
+               border-color: var(--accent-pink);
+               color: var(--accent-pink);
+               background-color: #fffafb;
+          }
+
+          /* --- 主內容容器 (不再使用 table) --- */
+          .container-content {
+               width: 90%;
+               max-width: 1000px;
+               /* 寬度稍微撐開一點 */
+               margin: 0 auto;
+               flex: 1;
+               /* 確保 footer 在底部 */
+               display: flex;
+               flex-direction: column;
+               gap: 50px;
+               /* 卡片之間的距離 */
+               padding-bottom: 80px;
+          }
+
+          /* --- 卡片 (Card) 基礎樣式 --- */
+          .journal-card {
+               background-color: var(--card-bg);
+               border-radius: 16px;
+               /* 圓角更圓潤 */
+               overflow: hidden;
+               box-shadow: 0 5px 25px rgba(0, 0, 0, 0.02);
+               /* 極輕微陰影 */
+               display: flex;
+               /* 左右排版 */
+               transition: all 0.5s var(--ease);
+               border: 1px solid transparent;
+          }
+
+          .journal-card:hover {
+               transform: translateY(-8px) scale(1.01);
+               box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05);
+               border-color: rgba(255, 182, 193, 0.1);
+          }
+
+          /* 圖片區塊 */
+          .card-media {
+               flex: 1.1;
+               /* 圖片佔比稍微多一點 */
+               position: relative;
+               overflow: hidden;
+               line-height: 0;
+          }
+
+          .main-img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+               /* 確保圖片不變形且填滿 */
+               transition: transform 0.8s var(--ease);
+          }
+
+          .journal-card:hover .main-img {
+               transform: scale(1.05);
+          }
+
+          /* 地熱谷的副圖網格優化 */
+          .sub-media-grid {
+               position: absolute;
+               bottom: 15px;
+               right: 15px;
+               display: flex;
+               gap: 8px;
+               z-index: 2;
+          }
+
+          .sub-img-link {
+               width: 60px;
+               height: 60px;
+               border-radius: 8px;
+               overflow: hidden;
+               border: 2px solid #fff;
+               /* 白框點綴 */
+               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+               transition: transform 0.3s ease;
+          }
+
+          .sub-img-link:hover {
+               transform: translateY(-3px);
+          }
+
+          .sub-img-link img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+          }
+
+          /* 文字內容區塊 */
+          .card-body {
+               flex: 1;
+               padding: 40px;
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+               /* 垂直置中 */
+          }
+
+          .card-meta {
+               font-size: 0.75rem;
+               color: #b0b0b0;
+               letter-spacing: 2px;
+               margin-bottom: 15px;
+               display: flex;
+               align-items: center;
+               gap: 10px;
+          }
+
+          .card-meta::before {
+               content: "";
+               width: 20px;
+               height: 1px;
+               background-color: #ddd;
+          }
+
+          .spot-title {
+               font-family: 'Noto Serif TC', serif;
+               font-size: 1.6rem;
+               color: var(--text-dark);
+               margin: 0 0 15px;
+               font-weight: 500;
+          }
+
+          .description {
+               font-size: 0.95rem;
+               color: var(--text-muted);
+               margin-bottom: 30px;
+               text-align: justify;
+               /* 文字齊行 */
+          }
+
+          /* 精飾按鈕 */
+          .more-btn {
+               display: inline-flex;
+               align-items: center;
+               gap: 8px;
+               color: var(--accent-dusty);
+               text-decoration: none;
+               font-size: 0.9rem;
+               letter-spacing: 1px;
+               transition: color 0.3s ease;
+               align-self: flex-start;
+               /* 靠左 */
+          }
+
+          .more-btn::after {
+               content: "→";
+               transition: transform 0.3s ease;
+          }
+
+          .more-btn:hover {
+               color: var(--accent-pink);
+          }
+
+          .more-btn:hover::after {
+               transform: translateX(5px);
+          }
+
+          /* --- 回到頂部按鈕 (更精緻) --- */
+          .top-btn {
+               position: fixed;
+               bottom: 40px;
+               right: 40px;
+               width: 50px;
+               height: 50px;
+               background-color: #fff;
+               border: 1px solid var(--border-light);
+               border-radius: 50%;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               text-decoration: none;
+               color: #999;
+               font-size: 0.75rem;
+               box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+               z-index: 100;
+               transition: all 0.4s var(--ease);
+               letter-spacing: 1px;
+          }
+
+          .top-btn:hover {
+               transform: translateY(-8px);
+               border-color: var(--accent-pink);
+               color: var(--accent-pink);
+               box-shadow: 0 12px 30px rgba(255, 182, 193, 0.15);
+          }
+
+          /* --- 頁尾 (Footer) --- */
+          footer {
+               text-align: center;
+               padding: 50px 20px;
+               font-size: 0.8rem;
+               color: #b0b0b0;
+               letter-spacing: 1px;
+               background-color: rgba(255, 255, 255, 0.5);
+               border-top: 1px solid var(--border-light);
+               margin-top: auto;
+          }
+
+          /* --- 手機版 RWD 優化 (新增，確保好看) --- */
+          @media (max-width: 768px) {
+
+               header,
+               .header-section,
+               .container-content {
+                    width: 92%;
+               }
+
+               .journal-card {
+                    flex-direction: column;
+                    /* 圖片文字上下排 */
+               }
+
+               .card-media {
+                    height: 250px;
+                    /* 固定圖片高度 */
+               }
+
+               .card-body {
+                    padding: 30px;
+               }
+
+               .spot-title {
+                    font-size: 1.4rem;
+               }
+
+               h1 {
+                    font-size: 1.8rem;
+               }
+          }
+     </style>
+</head>
+
+<body>
+
+     <header>
+          <a href="#" class="site-logo">Travelogue</a>
+          <div style="font-size: 0.8rem; color: #aaa;">摄影集</div>
+     </header>
+
+     <a href="#" class="top-btn" title="回到頂部">TOP</a>
+
+     <div class="header-section">
+          <span class="sub-title">Memories of the Journey</span>
+          <h1>去過的景點及美食 <small>Exploring Taipei and Beyond</small></h1>
+
+          <div class="filter-container">
+               <button class="filter-btn active" data-filter="all">全部</button>
+               <button class="filter-btn" data-filter="nature">自然</button>
+               <button class="filter-btn" data-filter="art">文藝</button>
+               <button class="filter-btn" data-filter="food">美食</button>
+          </div>
+     </div>
+
+     <div class="container-content">
+
+          <article class="journal-card" data-category="nature">
+               <div class="card-media">
+                    <img src="./page/img/14.jpg" alt="北投地熱谷" class="main-img">
+
+                    <div class="sub-media-grid">
+                         <a href="./page/p2.html" class="sub-img-link" title="地熱景觀">
+                              <img src="./page/img/12.jpg">
+                         </a>
+                         <a href="./page/p3.html" class="sub-img-link" title="步道風光">
+                              <img src="./page/img/13.jpg">
+                         </a>
+                    </div>
+               </div>
+               <div class="card-body">
+                    <div class="card-meta">BEITOU ‧ NATURAL</div>
+                    <h2 class="spot-title">北投地熱谷</h2>
+                    <div class="description">
+                         位於台北市北投區，是一個著名的地熱景點。這裡有壯觀的地熱活動，如熱氣騰騰的溫泉池和蒸汽噴發。周圍設有舒適的步道與觀景平台，讓遊客能近距離觀察自然風光。
+                    </div>
+                    <a href="./page/p1.html" class="more-btn">READ STORY</a>
+                    </td>
+          </article>
+
+          <article class="journal-card" data-category="food">
+               <div class="card-media">
+                    <img src="./page/img/01.jpg" alt="莫恩先生布丁" class="main-img">
+               </div>
+               <div class="card-body">
+                    <div class="card-meta">BANQIAO ‧ FOOD</div>
+                    <h2 class="spot-title">Mr. Moan 莫恩先生</h2>
+                    <div class="description">
+                         位於板橋的浮誇系布丁專賣店，從經典原味到造型布丁通通都有。不僅滿足甜點控的胃，更是拍照打卡的聖地，無論簡單吃還是精心拍都很適合。
+                    </div>
+                    <a href="./page/p2.html" class="more-btn">READ STORY</a>
+                    </td>
+               </div>
+          </article>
+
+          <article class="journal-card" data-category="art">
+               <div class="card-media">
+                    <img src="./page/img/07.jpg" alt="蜷川實花展" class="main-img">
+               </div>
+               <div class="card-body">
+                    <div class="card-meta">HUASHAN ‧ ART</div>
+                    <h2 class="spot-title">華山 蜷川實花展</h2>
+                    <div class="description">
+                         「彼岸之光，此岸之影」<br>
+                         ❀ 現實與虛擬交錯，展開沉浸式光影藝術體驗。<br>
+                         ✿ 720 度全景影像 × 絢麗花園交織，邀你走入夢幻異境。<br><br>
+                         蜷川實花睽違10年再度於台北舉辦大型個展——《蜷川實花展 with EiM：彼岸之光，此岸之影》，本次為海外最大規模的沉浸式藝術體驗，由蜷川實花與科技藝術團隊 EiM
+                         共同策劃，突破以往以平面攝影為主的創作形式，透過立體裝置與影像作品，帶領觀眾進入虛擬與現實交錯的感官之旅。展覽共八大展區，不僅有盛開的絢麗花園、還有約 2,000
+                         條水晶串飾隨光影律動的奇幻空間，並結合 720 度全景影像，構築無限延伸的視覺幻境，帶來前所未有的沉浸式震撼。
+                    </div>
+                    <a href="./page/p3.html" class="more-btn">READ STORY</a>
+               </div>
+          </article>
+
+          <article class="journal-card" data-category="art">
+               <div class="card-media">
+                    <img src="./page/img/05.jpg" alt="台北美術館" class="main-img">
+               </div>
+               <div class="card-body">
+                    <div class="card-meta">ZHONGSHAN ‧ ART</div>
+                    <h2 class="spot-title">台北美術館 (北美館)</h2>
+                    <div class="description">
+                         位於台北市中山區，是台灣第一座專門展示現代藝術的美術館。簡約、極具現代感的建築結構，本身就是一件藝術品，是洗滌心靈的好去處。
+                    </div>
+                    <a href="./page/p4.html" class="more-btn">READ STORY</a>
+               </div>
+          </article>
+          <article class="journal-card" data-category="nature">
+               <div class="card-media">
+                    <img src="./page/img/20.jpg" alt="野柳岩洞水族館" class="main-img">
+               </div>
+               <div class="card-body">
+                    <div class="card-meta">WANLI ‧ FAMILY & SHOW</div>
+                    <h2 class="spot-title">野柳 岩洞水族館</h2>
+                    <div class="description">
+                         位於新北市萬里區，緊鄰野柳地質公園的隱藏秘境。這裡除了能近距離觀賞繽紛的室內水族生態，更有精彩絕倫的海獅、海豚表演秀，以及令人屏息的真人高空跳水演出，是兼具知識與娛樂的海洋奇幻世界。
+                    </div>
+                    <a href="./page/p5.html" class="more-btn">READ STORY</a>
+               </div>
+          </article>
+          <article class="journal-card" data-category="lifestyle">
+               <div class="card-media">
+                    <img src="./page/img/18.jpg" alt="台北《吉伊卡哇》常設店" class="main-img">
+               </div>
+               <div class="card-body">
+                    <div class="card-meta">TAIPEI ‧ CUTE & SHOPPING</div>
+                    <h2 class="spot-title">台北《吉伊卡哇》常設店</h2>
+                    <div class="description">
+                         吉伊卡哇愛好者的天堂！位於台北的官方常設店，店內滿滿都是小八、烏薩奇與吉伊的可愛身影。除了豐富的官方周邊與限定商品外，精緻的佈置讓人彷彿走進了漫畫世界，每一處角落都充滿療癒感，絕對是粉絲必訪的打卡點。
+                    </div>
+                    <a href="./page/p6.html" class="more-btn">READ STORY</a>
+               </div>
+
+          </article>
+          <article class="journal-card" data-category="nature">
+               <div class="card-media">
+                    <img src="./page/img/17.jpg" alt="北投行天宮落羽松" class="main-img">
+               </div>
+               <div class="card-body">
+                    <div class="card-meta">BEITOU ‧ NATURE & SEASONAL</div>
+                    <h2 class="spot-title">北投行天宮 落羽松</h2>
+                    <div class="description">
+                         隱身於北投行天宮（忠義廟）後山的靜謐秘境。每逢秋冬交替，步道兩側的落羽松便會由綠轉為深紅焦糖色，在陽光灑落時顯得格外浪漫。這裡遠離城市的喧囂，在參拜之餘漫步於紅葉林間，能感受到洗滌心靈的平靜與季節流轉之美。
+                    </div>
+                    <a href="./page/p7.html" class="more-btn">READ STORY</a>
+               </div>
+          </article>
+
+
+     </div>
+     <footer>
+          <div style="font-family: 'Satisfy', cursive; font-size: 1.4rem; color: #ccc; margin-bottom: 10px;">Travelogue
+          </div>
+          &copy; 2026 旅 の 記憶 ‧ Designed with Love in Taiwan
+     </footer>
+     <script>
+          const filterBtns = document.querySelectorAll('.filter-btn');
+          const cards = document.querySelectorAll('.journal-card');
+
+          filterBtns.forEach(btn => {
+               btn.addEventListener('click', () => {
+                    // 1. 處理按鈕的 active 狀態
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    // 2. 取得點擊的分類名稱
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // 3. 篩選卡片
+                    cards.forEach(card => {
+                         const cardCategory = card.getAttribute('data-category');
+
+                         if (filterValue === 'all' || filterValue === cardCategory) {
+                              card.style.display = 'flex'; // 顯示符合的
+                              // 額外加一點淡入效果
+                              card.style.opacity = '0';
+                              setTimeout(() => {
+                                   card.style.opacity = '1';
+                              }, 50);
+                         } else {
+                              card.style.display = 'none'; // 隱藏不符合的
+                         }
+                    });
+               });
+          });
+     </script>
+
+</body>
+
+</html>

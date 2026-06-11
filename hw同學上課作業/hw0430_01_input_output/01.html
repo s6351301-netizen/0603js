@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiikawa Atelier</title>
+    <style>
+        :root {
+            --bg-paper: #fcfaf2; 
+            --border-ink: #4a4a4a;
+            --sub-ink: #8c8c8c;
+            --highlight: #f4d9d9;
+            --card-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-paper);
+            background-image: radial-gradient(#e0e0e0 0.8px, transparent 0.8px);
+            background-size: 20px 20px;
+            color: var(--border-ink);
+            font-family: "serif", "Noto Serif TC", "Microsoft JhengHei", sans-serif;
+            margin: 0; padding: 40px 20px; line-height: 1.8;
+        }
+
+        .container { max-width: 1050px; margin: 0 auto; display: flex; flex-direction: column; gap: 35px; }
+
+        header { border-left: 8px solid var(--border-ink); padding: 10px 25px; }
+        header h1 { font-size: 2.2rem; font-weight: 900; margin: 0; letter-spacing: 2px; }
+
+        .search-row { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid var(--border-ink); padding-bottom: 5px; margin: 10px 0; }
+        .search-row input { flex: 1; border: none; background: transparent; font-size: 1.1rem; outline: none; font-family: inherit; }
+        .search-row button { background: var(--border-ink); color: white; border: none; padding: 8px 25px; cursor: pointer; transition: 0.3s; }
+
+        .content-grid { display: grid; grid-template-columns: 1fr 320px; gap: 45px; }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+
+        .paper-card { background: var(--card-white); border: 1px solid #d0d0d0; box-shadow: 6px 6px 0px #eee; padding: 30px; margin-bottom: 40px; }
+        
+        .lottery-hero { background: #fffcf0; border: 1px dashed var(--sub-ink); padding: 40px 20px; text-align: center; margin-bottom: 25px; min-height: 50px; }
+        
+        .view-group { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 480px; }
+        .view-item { border: 1px solid var(--border-ink); display: flex; flex-direction: column; background: white; }
+        .view-tab { padding: 8px 15px; font-size: 0.75rem; border-bottom: 1px solid var(--border-ink); display: flex; justify-content: space-between; align-items: center; background: #fafafa; }
+        .external-link { text-decoration: none; color: var(--sub-ink); border: 1px solid #ddd; padding: 1px 8px; border-radius: 3px; font-size: 0.7rem; }
+        .external-link:hover { background: var(--border-ink); color: white; }
+        iframe { width: 100%; flex: 1; border: none; }
+
+        /* --- 色彩實驗室固定化 (修復跳動問題) --- */
+        .color-section { margin-bottom: 50px; }
+        .side-title { font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 15px; font-weight: bold; border-bottom: 1px solid var(--border-ink); display: inline-block; }
+        
+        /* 固定高度容器，防止格子亂跑 */
+        .color-lab-container { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+            height: 220px; /* 固定高度，內容換掉時容器不跳動 */
+            align-content: start;
+        }
+
+        .color-swatch {
+            background: white; 
+            border: 1px solid #ddd; 
+            padding: 5px; 
+            height: 100px; /* 固定色標高度 */
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .color-swatch:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.08); }
+        .color-preview { width: 100%; height: 65%; border-radius: 2px; }
+        .color-code { font-size: 0.65rem; font-family: monospace; text-align: center; margin-top: 5px; color: var(--sub-ink); }
+        
+        .btn-refresh { 
+            width: 100%; border: 1px solid var(--border-ink); background: none; 
+            padding: 10px; margin-top: 10px; cursor: pointer; font-size: 0.8rem; transition: 0.3s;
+        }
+        .btn-refresh:hover { background: var(--border-ink); color: white; }
+
+        .quote-wrap { padding: 25px; border-top: 1px solid var(--border-ink); border-bottom: 1px solid var(--border-ink); text-align: center; background: white; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+
+        .stamp {
+            width: 85px; height: 85px; border: 2px solid var(--highlight); color: var(--highlight); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; transform: rotate(-15deg); margin-left: auto; margin-top: 30px; font-weight: bold; text-align: center; line-height: 1.2; box-shadow: inset 0 0 0 2px var(--highlight); outline: 1px dashed var(--highlight); outline-offset: 4px;
+        }
+        .task-tag { background: var(--highlight); border: 1px solid #e2b6b6; padding: 4px 12px; font-size: 0.85rem; border-radius: 4px; display: inline-flex; align-items: center; gap: 8px; margin: 0 8px 8px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Atelier Notebook.</h1>
+        <p>今天想做些什麼呢 ? 別猶豫了 !</p>
+    </header>
+
+    <div class="search-row">
+        <input type="text" id="mainSearch" placeholder="在此輸入搜尋主題 (按 Enter 同步)..." onkeypress="if(event.key==='Enter') updateAll()">
+        <button onclick="updateAll()">GO EXPLORE</button>
+    </div>
+
+    <div class="content-grid">
+        <main>
+            <div class="paper-card">
+                <div class="lottery-hero"><div id="winner-display" style="font-weight: bold; font-size: 1.6rem;">今日の任務は？</div></div>
+                <button onclick="runLottery()" style="width:100%; background:var(--border-ink); color:white; border:none; padding:15px; cursor:pointer; letter-spacing:3px;">抽籤決定任務</button>
+                <div style="display: flex; border: 1px solid var(--border-ink); margin-top: 20px;">
+                    <input type="text" id="taskInput" placeholder="在此輸入新任務..." style="flex:1; border:none; padding:12px; outline:none;" onkeypress="if(event.key==='Enter') addTask()">
+                    <button onclick="addTask()" style="background:#f0f0f0; border:none; padding:0 20px; cursor:pointer;">ADD</button>
+                </div>
+                <div id="todoList" style="margin-top: 20px;"></div>
+            </div>
+
+            <div class="view-group">
+                <div class="view-item">
+                    <div class="view-tab"><span>PREVIEW</span><a id="link-google" href="https://www.google.com" target="_blank" class="external-link">GOOGLE ↗</a></div>
+                    <iframe id="frame-google" src="https://www.bing.com/search?q=Chiikawa"></iframe>
+                </div>
+                <div class="view-item">
+                    <div class="view-tab"><span>MAPS</span><a id="link-map" href="https://www.google.com/maps" target="_blank" class="external-link">MAPS ↗</a></div>
+                    <iframe id="frame-map" src="https://maps.google.com/maps?q=台灣&output=embed"></iframe>
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <div class="color-section">
+                <div class="side-title">COLOR LAB / 色彩實驗室</div>
+                <div class="color-lab-container" id="color-lab">
+                    <!-- 色卡將在這裡生成 -->
+                </div>
+                <button class="btn-refresh" onclick="getColors()">🔄 重新調配顯色色譜</button>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+                <div class="side-title">DAILY MOTTO</div>
+                <div class="quote-wrap" id="quote-box">「...」</div>
+                <button onclick="getQuote()" style="background:none; border:none; color:var(--sub-ink); cursor:pointer; font-size:0.7rem; width:100%; text-align:right; margin-top:10px;">[ 換個想法 ]</button>
+            </div>
+
+            <div style="font-size: 0.8rem; color: var(--sub-ink);">
+                <b>STATUS:</b> STABLE MODE<br>
+                <b>INSPIRE:</b> CHIIKAWA<br>
+                <div class="stamp">APPROVED<br>BY CHIIKAWA</div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<script>
+    function updateAll() {
+        const val = document.getElementById('mainSearch').value;
+        if(!val) return;
+        const encoded = encodeURIComponent(val);
+        document.getElementById('frame-google').src = `https://www.bing.com/search?q=${encoded}`;
+        document.getElementById('frame-map').src = `https://maps.google.com/maps?q=${encoded}&output=embed`;
+        document.getElementById('link-google').href = `https://www.google.com/search?q=${encoded}`;
+        document.getElementById('link-map').href = `https://www.google.com/maps/search/${encoded}`;
+    }
+
+    let tasks = JSON.parse(localStorage.getItem('chii-blog-stable') || '["複習 PHP 陣列", "練習 CSS 排版"]');
+    function render() {
+        const list = document.getElementById('todoList');
+        list.innerHTML = tasks.map((t, i) => `<div class="task-tag"><span>${t}</span><span style="cursor:pointer" onclick="removeTask(${i})">×</span></div>`).join('');
+        localStorage.setItem('chii-blog-stable', JSON.stringify(tasks));
+    }
+    function addTask() {
+        const input = document.getElementById('taskInput');
+        if (input.value.trim()) { tasks.push(input.value.trim()); input.value = ""; render(); }
+    }
+    function removeTask(i) { tasks.splice(i, 1); render(); }
+
+    function runLottery() {
+        if(tasks.length === 0) return;
+        const display = document.getElementById('winner-display');
+        let count = 0;
+        const timer = setInterval(() => {
+            display.innerText = tasks[Math.floor(Math.random() * tasks.length)];
+            if (count++ > 15) { clearInterval(timer); display.innerText = "⭐ " + display.innerText; }
+        }, 60);
+    }
+
+    function getQuote() {
+        const qs = ["只要有夥伴在，就能變強。", "休息也是一種討伐項目。", "慢慢來，比較快。", "唷哈！"];
+        document.getElementById('quote-box').innerText = qs[Math.floor(Math.random() * qs.length)];
+    }
+
+    // --- 色彩實驗室優化邏輯 ---
+    function getColors() {
+        const lab = document.getElementById('color-lab');
+        lab.innerHTML = ''; // 清空內容
+        
+        // 強制分開色調區間，確保色差明顯 [紅/橙, 綠/黃, 藍/青, 紫/粉]
+        const hueBasics = [0, 90, 200, 300]; 
+        
+        for(let i=0; i<4; i++) {
+            // 隨機在四個大區間中取色，保證色差
+            const h = hueBasics[i] + (Math.random() * 40); 
+            const s = 40 + Math.random() * 20; // 提高飽和度
+            const l = 75 + Math.random() * 10; // 維持日系明亮度
+            const color = `hsl(${Math.floor(h)}, ${Math.floor(s)}%, ${Math.floor(l)}%)`;
+            
+            const swatch = document.createElement('div');
+            swatch.className = 'color-swatch';
+            swatch.innerHTML = `
+                <div class="color-preview" style="background: ${color}"></div>
+                <div class="color-code">${color}</div>
+            `;
+            swatch.onclick = () => {
+                navigator.clipboard.writeText(color);
+                alert('已複製色碼：' + color);
+            };
+            lab.appendChild(swatch);
+        }
+    }
+
+    render(); getQuote(); getColors();
+</script>
+
+</body>
+</html>

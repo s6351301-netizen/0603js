@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          body {
+               font-family: "Microsoft JhengHei", Arial, sans-serif;
+               background-color: #f4f7f6;
+               padding: 50px;
+          }
+
+          fieldset {
+               width: 500px;
+               margin: auto;
+               background: white;
+               border: none;
+               border-radius: 12px;
+               box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+               padding: 30px;
+          }
+
+          legend {
+               font-weight: bold;
+               color: #555;
+               background: #fff;
+               padding: 0 10px;
+               font-size: 1.2em;
+          }
+
+          h1 {
+               text-align: center;
+               color: #ff7f7f;
+               margin-bottom: 30px;
+          }
+
+          p {
+               margin-bottom: 20px;
+          }
+
+          input[type="number"],
+          input[type="tel"],
+          input[type="date"],
+          select,
+          textarea {
+               width: calc(100% - 120px);
+               padding: 8px 12px;
+               border: 1px solid #ddd;
+               border-radius: 6px;
+               box-sizing: border-box;
+
+          }
+
+          input[type="submit"] {
+               width: 100%;
+               background-color: #ff7f7f;
+               color: white;
+               border: none;
+               padding: 12px;
+               border-radius: 6px;
+               cursor: pointer;
+               font-size: 16px;
+               transition: background 0.3s;
+          }
+
+          input[type="submit"]:hover {
+               background-color: #ff5f5f;
+          }
+     </style>
+</head>
+
+
+<body>
+     <h1>form表單練習</h1>
+
+     <form action="">
+          <fieldset>
+               <legend>XXXXX公司<br>
+                    新進員工報到資料</legend>
+               <P>
+                    <label for="date">填寫日期：</label>
+                    <input type="date" name="" id="date">
+               </P>
+               <p>
+                    <label for="gender">部門：</label>
+                    <label><input type="radio" name="gender" value="男生">行銷部</label>
+                    <label><input type="radio" name="gender" value="女生">企劃部</label>
+                    <label><input type="radio" name="gender" value="保密">採購部</label>
+                    <label><input type="radio" name="gender" value="保密">總務部</label><br>
+                    <label><input type="radio" name="gender" value="保密">秘書部</label>
+                    <label><input type="radio" name="gender" value="保密">服務部</label>
+               </p>
+
+               <p>
+                    <label for="name">姓名：</label>
+                    <input type="text" name="" id="name" value="" placeholder="請輸入姓名">
+               </p>
+               <p>
+                    <label for="count">聯絡電話：</label>
+                    <input type="number" name="" id="count" min="0" max="100">
+               </p>
+               <p>
+                    <label for="gender">性別：</label>
+                    <label><input type="radio" name="gender" value="男生">男</label>
+                    <label><input type="radio" name="gender" value="女生">女</label>
+                    <label><input type="radio" name="gender" value="保密">保密</label>
+               </p>
+               <P>
+                    <label for="phone">連絡電話：</label><br>
+                    <input type="tel" name="" id="phone">
+               </P>
+
+               <label for="">請選擇你的交通工具(可複選)</label><br>
+               <input type="checkbox" id="vehicle1" name="vehicle[]" value="bike">
+               <label for="vehicle1">大眾交通工具</label><br>
+               <input type="checkbox" id="vehicle2" name="vehicle[]" value="car">
+               <label for="vehicle2">機車</label><br>
+               <input type="checkbox" id="vehicle3" name="vehicle[]" value="boat">
+               <label for="vehicle3">汽車</label><br>
+               <input type="checkbox" id="vehicle4" name="vehicle[]" value="boat">
+               <label for="vehicle4">其他</label><br>
+               </P>
+               <p>
+                    <input type="file" name="" id="">
+
+               </p>
+
+               <p>
+                    <label for="murmur">留言區</label><br>
+                    <textarea name="" id="murmur" rows="6" cols="30">
+                    </textarea>
+               </p>
+
+
+               <p>
+                    <input type="submit" value="提交">
+               </p>
+          </fieldset>
+
+     </form>
+
+</body>
+
+</html>

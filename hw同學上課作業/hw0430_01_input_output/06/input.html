@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商情分析表表單</title>
+    <style>
+        body {
+            font-family: "微軟正黑體", sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0056b3;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #0056b3;
+            background: white;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>商情分析表填寫系統</h2>
+        <form action="generate.php" method="POST">
+
+            <fieldset>
+                <legend>一、基本資訊與價格數量</legend>
+                <div class="row">
+                    <div class="col form-group"><label>專案代碼：</label><input type="text" name="project_code" required>
+                    </div>
+                    <div class="col form-group"><label>品名：</label><input type="text" name="product_name" required></div>
+                    <div class="col form-group"><label>填送日期：</label><input type="date" name="fill_date" required></div>
+                </div>
+                <div id="item-container">
+                    <div class="item-row"
+                        style="background: #f9f9f9; padding: 15px; border: 1px dashed #ccc; margin-bottom: 15px; position: relative;">
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h4 style="margin:0; color:#555;">項次 <span class="item-number">1</span></h4>
+                            <button type="button" class="delete-btn" onclick="removeItem(this)" style="display: none; background-color: #dc3545; color: white; border: none; padding: 6px 12px; font-size: 14px; border-radius: 4px; cursor: pointer; width: auto; font-weight: bold;">刪除此項次</button>
+                        </div>
+
+                        <div class="row">
+                            <div class="col form-group"><label>單位：</label><input type="text" name="unit[]" value="式">
+                            </div>
+                            <div class="col form-group"><label>數量：</label><input type="number" name="quantity[]" value="1" oninput="calculateTotals()"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group"><label>以往採購單價：</label><input type="number" name="prev_unit_price[]" oninput="calculateTotals()"></div>
+                            <div class="col form-group"><label>市場最低單價：</label><input type="number" name="market_lowest_price[]" oninput="calculateTotals()"></div>
+                            <div class="col form-group"><label>申購預估單價：</label><input type="number" name="est_unit_price[]" required oninput="calculateTotals()"></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" onclick="addItem()"
+                    style="background-color: #28a745; margin-bottom: 15px; color: white; border: none; padding: 15px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold;">+
+                    新增一個項次</button>
+
+                <!-- 合計總價區塊 -->
+                <div class="row" style="margin-top: 20px; border-top: 2px solid #ddd; padding-top: 15px;">
+                    <div class="col form-group">
+                        <label>以往採購總價 (自動合計)：</label>
+                        <input type="number" name="sum_prev_total_input" id="sum_prev_total" readonly
+                            style="background-color: #e9ecef; cursor: not-allowed;">
+                    </div>
+                    <div class="col form-group">
+                        <label>市場最低總價 (自動合計)：</label>
+                        <input type="number" name="sum_market_total_input" id="sum_market_total" readonly
+                            style="background-color: #e9ecef; cursor: not-allowed;">
+                    </div>
+                    <div class="col form-group">
+                        <label>申購預估總價 (自動合計)：</label>
+                        <input type="number" name="sum_est_total_input" id="sum_est_total" required readonly
+                            style="background-color: #e9ecef; cursor: not-allowed;">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>二、商情分析及說明 (文字敘述區)</legend>
+                <div class="form-group"><label>一、目的：</label><textarea name="purpose" rows="2">本案係為…</textarea></div>
+                <div class="form-group"><label>二、商源資料：</label><textarea name="source_data" rows="2"></textarea></div>
+                <div class="form-group"><label>三、本單位以往採購紀錄：</label><textarea name="prev_records" rows="2"></textarea>
+                </div>
+
+                <!-- 新增的區域 -->
+                <div class="form-group"><label>四、國軍其他單位以往採購紀錄：</label><textarea name="other_military_records"
+                        rows="2">無</textarea></div>
+                <div class="form-group"><label>五、市場其他成交價格：</label><textarea name="other_market_prices"
+                        rows="2">無</textarea></div>
+
+                <div class="form-group"><label>六、市場(廠商)訪價調查：</label><textarea name="market_survey" rows="2"></textarea>
+                </div>
+
+                <!-- 新增的區域 -->
+                <div class="form-group"><label>七、訪價廠商之以往折扣紀錄：</label><textarea name="discount_records"
+                        rows="2">無</textarea></div>
+                <div class="form-group"><label>八、相關物價指數：</label><textarea name="price_index" rows="2">無</textarea></div>
+                <div class="form-group"><label>九、專業單位之成本分析：</label><textarea name="cost_analysis" rows="3"></textarea>
+                </div>
+
+                <div class="form-group"><label>十、預估金額與結論：</label><textarea name="conclusion"
+                        rows="2">綜上所述，訂定本案預估金額為總價新臺幣○○元。</textarea></div>
+            </fieldset>
+
+            <button type="submit">產出 Word 檔案</button>
+        </form>
+    </div>
+    <script>
+        // 1. 自動計算總計的函數 (強化版：確保絕對觸發)
+        function calculateTotals() {
+            let sumPrev = 0, sumMarket = 0, sumEst = 0;
+            const rows = document.querySelectorAll('.item-row');
+
+            // 巡迴每一個項次，計算 (數量 × 單價) 並加總
+            rows.forEach(row => {
+                const qty = parseFloat(row.querySelector('input[name="quantity[]"]').value) || 0;
+                const prev = parseFloat(row.querySelector('input[name="prev_unit_price[]"]').value) || 0;
+                const market = parseFloat(row.querySelector('input[name="market_lowest_price[]"]').value) || 0;
+                const est = parseFloat(row.querySelector('input[name="est_unit_price[]"]').value) || 0;
+
+                sumPrev += (qty * prev);
+                sumMarket += (qty * market);
+                sumEst += (qty * est);
+            });
+
+            // 將算好的總計填入下方的唯讀欄位中
+            document.getElementById('sum_prev_total').value = sumPrev > 0 ? sumPrev : '';
+            document.getElementById('sum_market_total').value = sumMarket > 0 ? sumMarket : '';
+            document.getElementById('sum_est_total').value = sumEst > 0 ? sumEst : '';
+        }
+
+        // 2. 更新項次編號與控制「刪除按鈕」的顯示狀態
+        function updateItemNumbers() {
+            const allItems = document.querySelectorAll('.item-row');
+            allItems.forEach((item, index) => {
+                // 更新數字
+                item.querySelector('.item-number').innerText = index + 1;
+                // 如果總共只有 1 個項次，就不顯示刪除按鈕；超過 1 個才顯示
+                const delBtn = item.querySelector('.delete-btn');
+                if(delBtn) {
+                    delBtn.style.display = allItems.length > 1 ? 'block' : 'none';
+                }
+            });
+        }
+
+        // 3. 新增項次
+        function addItem() {
+            const container = document.getElementById('item-container');
+            const firstItem = container.querySelector('.item-row');
+            const newItem = firstItem.cloneNode(true);
+
+            // 清空新欄位的值 (保留單位和數量的預設值)
+            newItem.querySelectorAll('input').forEach(input => {
+                if (input.name !== 'unit[]' && input.name !== 'quantity[]') input.value = '';
+            });
+
+            container.appendChild(newItem);
+
+            updateItemNumbers(); // 更新編號與刪除按鈕
+            calculateTotals();   // 新增後重算一次
+        }
+
+        // 4. 刪除項次
+        function removeItem(btn) {
+            const container = document.getElementById('item-container');
+            if (container.querySelectorAll('.item-row').length > 1) {
+                // 找到按鈕所屬的那個 row 並把它刪除
+                btn.closest('.item-row').remove(); 
+                
+                updateItemNumbers(); // 刪除後重新編號
+                calculateTotals();   // 刪除後重新計算總計
+            }
+        }
+    </script>
+
+</body>
+
+</html>

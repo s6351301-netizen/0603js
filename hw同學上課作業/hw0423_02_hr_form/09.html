@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豪華人事資料管理系統</title>
+    <style>
+        /* 定義豪華配色與漸層 */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+            --accent-color: #6c5ce7;
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --text-main: #2d3436;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* 毛玻璃效果卡片 */
+        .container {
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        fieldset {
+            border: 1px solid #dcdde1;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 10px;
+        }
+
+        legend {
+            background: var(--accent-color);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        /* 欄位佈局優化 */
+        .form-item {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        /* 輸入框通用樣式 */
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #f1f2f6;
+            border-radius: 10px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--accent-color);
+            background: #fff;
+            box-shadow: 0 0 8px rgba(108, 92, 231, 0.2);
+        }
+
+        /* 選項群組 */
+        .choice-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 5px 0;
+        }
+
+        .choice-label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        /* 檔案上傳美化 */
+        input[type="file"] {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        /* 豪華按鈕 */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #5649c0;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>HR 系統登記</h1>
+
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <legend>人事資料表單 - Hello 你好嗎</legend>
+
+                <div class="form-item">
+                    <label for="name">員工姓名</label>
+                    <input type="text" name="username" id="name" placeholder="請輸入姓名" required>
+                </div>
+
+                <div class="form-item">
+                    <label for="count">優先級別 (0-100)</label>
+                    <input type="number" name="priority" id="count" min="0" max="100" value="50">
+                </div>
+
+                <div class="form-item">
+                    <label>性別設定</label>
+                    <div class="choice-group">
+                        <label class="choice-label"><input type="radio" name="gender" value="男"> 男</label>
+                        <label class="choice-label"><input type="radio" name="gender" value="女"> 女</label>
+                        <label class="choice-label"><input type="radio" name="gender" value="保密" checked> 保密</label>
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <label>交通工具</label>
+                    <div class="choice-group">
+                        <label class="choice-label"><input type="checkbox" name="v[]" value="Bike"> 自行車</label>
+                        <label class="choice-label"><input type="checkbox" name="v[]" value="Car"> 汽車</label>
+                        <label class="choice-label"><input type="checkbox" name="v[]" value="Boat"> 船隻</label>
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <label for="date">入職日期</label>
+                    <input type="date" name="join_date" id="date">
+                </div>
+
+                <div class="form-item">
+                    <label for="file_upload">個人附件 (PDF/JPG)</label>
+                    <input type="file" name="attachment" id="file_upload">
+                </div>
+
+                <div class="form-item">
+                    <label for="murmur">備註說明</label>
+                    <textarea name="remarks" id="murmur" rows="3" placeholder="有什麼想說的嗎？"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">確認送出資料</button>
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+
+</html>

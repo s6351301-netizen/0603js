@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算太陽角度</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 600px; margin: auto; }
+        .input-group { margin-bottom: 15px; }
+        label { display: inline-block; width: 100px; }
+        input { padding: 5px; width: 180px; }
+        #result { margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; }
+        strong { color: #d32f2f; }
+    </style>
+</head>
+<body>
+
+    <h1>計算太陽角度</h1>
+    <p>輸入位置與時間，計算太陽的高度角與方位角。</p>
+
+    <form id="sunForm">
+        <div class="input-group">
+            <label>日期時間：</label>
+            <input type="datetime-local" id="datetime" required>
+        </div>
+        <div class="input-group">
+            <label>緯度：</label>
+            <input type="number" id="lat" step="0.0001" value="25.0330" placeholder="例如：25.033 (台北)">
+        </div>
+        <div class="input-group">
+            <label>經度：</label>
+            <input type="number" id="lon" step="0.0001" value="121.5654" placeholder="例如：121.565 (台北)">
+        </div>
+        <input type="submit" value="開始計算">
+    </form>
+
+    <div id="result" style="display:none;"></div>
+
+<script>
+    document.getElementById('sunForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const dtValue = document.getElementById('datetime').value;
+        const lat = parseFloat(document.getElementById('lat').value);
+        const lon = parseFloat(document.getElementById('lon').value);
+        
+        if (!dtValue) return alert('請選擇時間');
+
+        const dt = new Date(dtValue);
+        const toRad = Math.PI / 180;
+        const toDeg = 180 / Math.PI;
+
+        // 1. 計算一年中的第幾天 (n)
+        const start = new Date(dt.getFullYear(), 0, 0);
+        const diff = dt - start;
+        const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        // 2. 太陽赤緯角 (Declination)
+        const declination = 23.45 * Math.sin(toRad * (360 / 365 * (dayOfYear - 81)));
+
+        // 3. 真太陽時修正 (均時差概念簡化)
+        // 主要是根據經度計算時差：(經度 - 中央經線120度) * 4分鐘
+        const localTime = dt.getHours() + dt.getMinutes() / 60;
+        const timeOffset = (lon - 120) * 4 / 60; // 假設台灣時區 UTC+8 基準為 120度
+        const solarTime = localTime + timeOffset;
+        
+        // 4. 時角 (Hour Angle, H) - 正午為 0, 每小時 15 度
+        const hourAngle = (solarTime - 12) * 15;
+
+        // 5. 計算高度角 (Altitude, α)
+        // sin(α) = sin(lat)sin(dec) + cos(lat)cos(dec)cos(H)
+        const sinAlt = Math.sin(lat * toRad) * Math.sin(declination * toRad) + 
+                       Math.cos(lat * toRad) * Math.cos(declination * toRad) * Math.cos(hourAngle * toRad);
+        const altitude = Math.asin(sinAlt) * toDeg;
+
+        // 6. 計算方位角 (Azimuth, Z) - 從正北順時針計算
+        // cos(Z) = (sin(dec) - sin(lat)sin(alt)) / (cos(lat)cos(alt))
+        let cosAz = (Math.sin(declination * toRad) - Math.sin(lat * toRad) * sinAlt) / 
+                    (Math.cos(lat * toRad) * Math.cos(altitude * toRad));
+        
+        // 限制範圍避免浮點數誤差導致 NaN
+        cosAz = Math.max(-1, Math.min(1, cosAz));
+        let azimuth = Math.acos(cosAz) * toDeg;
+
+        // 根據上午下午調整方位角
+        if (hourAngle > 0) {
+            azimuth = 360 - azimuth;
+        } else {
+            azimuth = azimuth; 
+        }
+
+        // 顯示結果
+        const resDiv = document.getElementById('result');
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = `
+            <h3>計算結果：</h3>
+            <p>太陽赤緯角：<strong>${declination.toFixed(2)}°</strong></p>
+            <p>太陽高度角：<strong>${altitude.toFixed(2)}°</strong> ${altitude < 0 ? '(此時為晚上)' : ''}</p>
+            <p>太陽方位角：<strong>${azimuth.toFixed(2)}°</strong> (正北為 0°，順時針)</p>
+            <small>* 方位角 90° 為正東，180° 為正南，270° 為正西。</small>
+        `;
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+        table {
+            width: 100%;
+            /* 建議加入 border-collapse 讓邊框不會重疊變粗 */
+            border-collapse: collapse; 
+        }
+        h3 {
+            color: lightblue;
+            text-align: center;
+        }
+        .box {   
+            /* width: auto;        */
+            height: 300px;
+            background-color: lightblue;
+            border: solid 1px rgb(228, 225, 225);
+            /* margin: 25px; */
+            /* padding: 25px; */
+        }
+        /* box1 不需要設定 100%，因為表格欄位會自動撐滿 */
+        .box1 {
+            background-color: rgb(164, 52, 168);
+        }
+        .box2 {
+            background-color: rgb(21, 47, 56);
+        }
+        .box3 {
+            background-color: rgb(13, 5, 121);
+        }
+        .box4 {
+            background-color: rgb(28, 165, 28);
+        }
+        img{
+            display: block;
+             margin-left: auto; 
+             margin-right: auto;
+             width: 50dvh;
+             height: 25dvh;
+        }
+    </style>
+    </head>
+    <body>
+        <h3>let it go</h3>
+        <table>
+            <tr>
+                <td class="box box1" colspan="12">
+
+                    <img src="1.png" alt="圖片1">
+                </td>
+            </tr>
+            <tr>
+                <td class="box box2" colspan="6">
+
+                    <img src="2.png" alt="圖片2">
+
+                </td>
+                <td class="box box2" colspan="6">
+
+                    <img src="3.png" alt="圖片3">
+
+                </td>
+            </tr>
+            <tr>
+                <td class="box box3" colspan="4">
+                    <img src="4.png" alt="圖片4">
+
+                </td>
+                <td class="box box3" colspan="4">
+                    <img src="5.png" alt="圖片5">
+
+                </td>
+                <td class="box box3" colspan="4">
+                    <img src="6.png" alt="圖片6">
+
+                </td>
+
+            </tr>
+            <tr>
+
+                <td class="box box4" colspan="3">
+                    <img src="7.png" alt="圖片7">
+
+                </td>
+                <td class="box box4" colspan="3">
+                    <img src="8.png" alt="圖片8">
+
+                </td>
+                <td class="box box4" colspan="3">
+                    <img src="9.png" alt="圖片9">
+
+                </td>
+                <td class="box box4" colspan="3">
+                    <img src="10.png" alt="圖片10">
+
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </body>
+</html>

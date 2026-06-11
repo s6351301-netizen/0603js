@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加入國軍</title>
+    <style>
+        /* 1. 背景設定 */
+        body {
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+            /* 這裡可以換成你想要的圖片網址 */
+            background-image: url('./image/背景.jpg');
+            background-size: cover;
+            /* 圖片覆蓋整個視窗 */
+            background-position: center;
+            /* 圖片置中 */
+            background-attachment: fixed;
+            /* 捲動時背景固定 */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            /* 水平置中表單 */
+            align-items: center;
+            /* 垂直置中表單 */
+            min-height: 100vh;
+            /* 確保高度至少跟螢幕一樣高 */
+            padding: 40px 0;
+        }
+
+        /* 2. 表單容器優化 */
+        .container {
+            max-width: 800px;
+            width: 90%;
+            /* 手機版自動縮小 */
+            background: rgba(255, 255, 255, 0.95);
+            /* 半透明白色，增加質感 */
+            padding: 40px;
+            border-radius: 12px;
+            /* 圓角更圓潤 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            /* 加強陰影深度 */
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 15px;
+        }
+
+        h3 {
+            color: #27ae60;
+            margin-top: 30px;
+            border-left: 5px solid #27ae60;
+            padding-left: 10px;
+        }
+
+        fieldset {
+            border: 1px solid #27ae60; /* 假設你有設定邊框 */
+            margin-bottom: 40px;    /* 增加區塊間的呼吸感 */
+            padding: 20px;          /* 讓內部的表單內容不要太貼邊框 */
+        }
+
+        legend {
+            font-size: 20px; /* 或是使用 24px */
+            font-weight: bold;  /* 讓文字加粗會更有標題感 */
+            color: #27ae60;
+            margin-top: 20px;
+            border-left: 5px solid #27ae60;
+            padding-left: 10px;
+            
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* 修正點：加入 flex-wrap 確保手機版會自動換行 */
+        .row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .row .form-group {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        /* 按鈕樣式 */
+        .btn-submit {
+            background-color: #27ae60;
+            /* 換成軍綠質感顏色 */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 25px;
+            transition: 0.3s;
+        }
+
+        /* 禁用狀態：灰色且不可點擊 */
+        .btn-submit:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background-color: #2980b9;
+        }
+
+        .agreement-area {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>志願役基本資料表</h2>
+
+        <form id="hr-form" action="/submit" method="POST">
+            <fieldset>
+                <legend>一、基本資料</legend>
+                <!-- 一、個人基本資料 -->
+                <!-- <h3>一、基本資料</h3> -->
+                <div class="row">
+                    <div class="form-group">
+                        <label for="full_name">中文姓名</label>
+                        <input type="text" id="full_name" name="full_name" required placeholder="王小明">
+                    </div>
+                    <div class="form-group">
+                        <label for="english_name">英文姓名</label>
+                        <input type="text" id="english_name" name="english_name" placeholder="David Wang">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="dob">身分證字號</label>
+                        <input type="text" id="identity" name="identity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">出生日期</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="gender">性別</label>
+                        <select id="gender" name="gender">
+                            <option value="">請選擇</option>
+                            <option value="male">男</option>
+                            <option value="female">女</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="education">最高學歷</label>
+                        <select id="education" name="education">
+                            <option value="">請選擇</option>
+                            <option value="junior_high">國中</option>
+                            <option value="senior_high">高中</option>
+                            <option value="bachelor">大學</option>
+                            <option value="master">碩士</option>
+                            <option value="doctorate">博士</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>、單位資訊</legend>
+                <!-- <h3>二、單位資訊</h3> -->
+                <div class="row">
+                    <div class="form-group">
+                        <label for="department">希望加入單位</label>
+                        <select id="department" name="department" required>
+                            <option value="">請選擇單位</option>
+                            <option value="army">陸軍戰鬥單位</option>
+                            <option value="marines">海軍陸戰隊</option>
+                            <option value="airforce">空軍作戰指揮部</option>
+                            <option value="mp">憲兵特勤隊</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start_date">預計報到日</label>
+                        <input type="date" id="start_date" name="start_date" required>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- 三、緊急聯絡人 -->
+            <fieldset>
+                <legend>三、緊急聯絡人</legend>
+                <!-- <h3>三、緊急聯絡人</h3> -->
+                <div class="row">
+                    <div class="form-group">
+                        <label for="emergency_contact">聯絡人姓名</label>
+                        <input type="text" id="emergency_contact" name="emergency_contact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="relationship">關係</label>
+                        <input type="text" id="relationship" name="relationship" placeholder="如：父女、配偶" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="emergency_phone">緊急聯絡電話</label>
+                    <input type="tel" id="emergency_phone" name="emergency_phone" required>
+                </div>
+
+                <!-- 四、同意聲明與提交 -->
+                <div class="agreement-area">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="agreement-checkbox" style="width: 18px; height: 18px;">
+                        <span>我已確認以上資料均屬實，並同意國軍用於人事相關作業。</span>
+                    </label>
+                </div>
+            </fieldset>
+            <button type="submit" id="submit-btn" class="btn-submit" disabled>提交入職資料</button>
+        </form>
+    </div>
+
+    <script>
+        // 確保 DOM 載入後再綁定事件
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkbox = document.getElementById('agreement-checkbox');
+            const submitBtn = document.getElementById('submit-btn');
+
+            // 初始化檢查（防止頁面重新整理後狀態不一）
+            submitBtn.disabled = !checkbox.checked;
+
+            // 監聽勾選動作
+            checkbox.addEventListener('change', function () {
+                // 當打勾時 (this.checked 為 true)，disabled 設為 false
+                submitBtn.disabled = !this.checked;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

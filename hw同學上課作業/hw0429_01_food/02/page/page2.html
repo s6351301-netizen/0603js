@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特色佳餚介紹</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            background: rgba(255,255,255,0.95);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .food-detail {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .food-detail-image {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        
+        .food-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .food-detail-content {
+            padding: 50px;
+        }
+        
+        .food-detail-content h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .food-detail-content h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .food-detail-content p,
+        .food-detail-content li {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .food-detail-content ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .food-detail-content li {
+            margin-bottom: 10px;
+        }
+        
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        
+        .page-nav a {
+            flex: 1;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .page-nav a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .food-detail-content {
+                padding: 30px;
+            }
+            
+            .food-detail-content h1 {
+                font-size: 2em;
+            }
+            
+            .food-detail-image {
+                height: 300px;
+            }
+            
+            .page-nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="../index.html">← 返回首頁</a>
+            <span style="color: #667eea; font-weight: bold; font-size: 1.3em;">茶苑</span>
+            <a href="page3.html">下一頁 →</a>
+        </nav>
+        
+        <div class="food-detail">
+            <div class="food-detail-image">
+                <img src="../images/image_02.png" alt="千層酥味噌烤豆腐">
+            </div>
+            <div class="food-detail-content">
+                <h1>✨ 茶苑 - 千層酥味噌烤豆腐</h1>
+                <p>以派皮和豆腐製作有如威靈頓牛排的綠色創意餐點，是茶苑對永續美食的創意詮釋。這道菜結合了西方派皮工藝與東方豆腐傳統，呈現出優雅而富有驚喜的綠色創意餐點。</p>
+                
+                <h2>創意特色</h2>
+                <ul>
+                    <li><strong>派皮工藝</strong> - 採用層層酥脆的千層派皮</li>
+                    <li><strong>豆腐精選</strong> - 精選優質豆腐作為主要食材</li>
+                    <li><strong>味噌風味</strong> - 搭配傳統味噌增添風味</li>
+                    <li><strong>烹飪巧思</strong> - 融合東西方烹飪技藝</li>
+                </ul>
+                
+                <h2>綠色創意</h2>
+                <p>這道菜打破傳統肉類主菜的概念，以豆腐為主角，呈現出令人驚艷的視覺效果和層次豐富的口感。酥脆的派皮、軟嫩的豆腐、香醇的味噌醬汁完美結合，展現出環保飲食的無限可能。</p>
+                
+                <h2>享受建議</h2>
+                <p>建議在派皮還帶有溫度時享用，此時派皮最為酥脆。搭配茶苑推薦的茶飲能更好地襯托菜餚的風味，體驗一場融合視覺、味覺與心靈的美食之旅。</p>
+                
+                <div class="page-nav">
+                    <a href="page1.html">← 上一道美食</a>
+                    <a href="page3.html">下一道美食 →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

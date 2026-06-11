@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <title>線上預約 - 極境</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f4f4f4;
+            font-family: "Microsoft JhengHei";
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            flex-wrap: wrap;
+        }
+
+        .info-side {
+            flex: 1;
+            background: url('https://images.unsplash.com/photo-1550966841-3ee5ad60d0d9?q=80&w=1000&auto=format&fit=crop') center/cover;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-overlay {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border: 1px solid #d4af37;
+            margin: 20px;
+        }
+
+        .form-side {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            color: #d4af37;
+            font-size: 2rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px;
+            background: #262626;
+            border: 1px solid #444;
+            color: white;
+        }
+
+        button {
+            background: #d4af37;
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #fff;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="info-side">
+            <div class="info-overlay">
+                <h3>極境 Teppanyaki</h3>
+                <p>📍 新北市泰山區貴子里 (範例地址)</p>
+                <p>📞 02-1234-5678</p>
+                <p>🕒 11:30 - 14:30 / 17:30 - 22:00</p>
+            </div>
+        </div>
+        <div class="form-side">
+            <h2>RESERVATION | 線上預約</h2>
+            <form>
+                <label>貴賓姓名</label><input type="text" placeholder="請輸入姓名">
+                <label>聯絡電話</label><input type="tel" placeholder="09XX-XXX-XXX">
+                <label>預約人數</label><input type="number" value="2">
+                <label>預約日期</label><input type="date">
+                <button type="submit">確認預約</button>
+            </form>
+            <a href="../index.html" style="margin-top:20px; color:#666; text-decoration:none;">返回首頁</a>
+        </div>
+    </div>
+</body>
+
+</html>

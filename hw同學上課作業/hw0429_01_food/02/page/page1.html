@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>經典美食介紹</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            background: rgba(255,255,255,0.95);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .food-detail {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .food-detail-image {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        
+        .food-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .food-detail-content {
+            padding: 50px;
+        }
+        
+        .food-detail-content h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .food-detail-content h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .food-detail-content p,
+        .food-detail-content li {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .food-detail-content ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .food-detail-content li {
+            margin-bottom: 10px;
+        }
+        
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 15px;
+        }
+        
+        .page-nav a {
+            flex: 1;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .page-nav a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .food-detail-content {
+                padding: 30px;
+            }
+            
+            .food-detail-content h1 {
+                font-size: 2em;
+            }
+            
+            .food-detail-image {
+                height: 300px;
+            }
+            
+            .page-nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="../index.html">← 返回首頁</a>
+            <span style="color: #667eea; font-weight: bold; font-size: 1.3em;">JIAMI呷米友善餐廳</span>
+            <a href="page2.html">下一頁 →</a>
+        </nav>
+        
+        <div class="food-detail">
+            <div class="food-detail-image">
+                <img src="../images/image_01.png" alt="綠鮮午仔魚">
+            </div>
+            <div class="food-detail-content">
+                <h1>🐟 JIAMI呷米友善餐廳 - 綠鮮午仔魚</h1>
+                <p>選用符合責任漁業要求的午仔魚入饌，是一道融合永續海洋資源與精心烹飪的佳餚。JIAMI呷米友善餐廳致力於推廣綠色飲食，選擇對環境友善且符合永續標準的食材，讓您享受美味的同時也為地球盡一份心力。</p>
+                
+                <h2>永續與責任</h2>
+                <ul>
+                    <li><strong>責任漁業</strong> - 選用符合 MSC 認證的午仔魚</li>
+                    <li><strong>永續發展</strong> - 支持海洋生態保護</li>
+                    <li><strong>友善飼養</strong> - 保護海洋資源與生物多樣性</li>
+                    <li><strong>環境承諾</strong> - 減少對海洋生態的影響</li>
+                </ul>
+                
+                <h2>風味特點</h2>
+                <p>午仔魚肉質細膩、鮮甜嫩滑，經過精心調理後，展現出海洋食材的原汁原味。搭配新鮮蔬菜與特製醬料，每一口都能品嚐到海的清香與廚師的巧思。</p>
+                
+                <h2>推薦享用方式</h2>
+                <p>建議在自然溫度下享用，感受午仔魚的鮮甜滋味。與家人和朋友分享這份永續美食，一起為綠色餐飲文化做出貢獻。</p>
+                
+                <div class="page-nav">
+                    <a href="../index.html">← 返回首頁</a>
+                    <a href="page2.html">下一道美食 →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* 全域設定：建議養成習慣加上 box-sizing，否則 border 會撐開寬度導致對不齊 */
+    * {
+        box-sizing: border-box; 
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        color: #4480b8;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    p {
+        color: #092379;
+        font-size: 24px; /* 稍微調小，避免在 20% 寬度的格子中文字溢出 */
+        text-align: center;
+    }
+
+    /* .w 是父容器，控制裡面兩個子 div 的排列方式 */
+    .w {
+        display: flex;         /* 使用彈性佈局，讓子元素（div）並排 */
+        justify-content: center; /* 讓內容在容器中水平置中 */
+        width: 100%;           /* 確保父容器佔滿寬度 */
+    }
+
+    /* 第一排左側：寬度 80% */
+    .c {
+        width: 80%;
+        height: 450px;
+        padding: 10px;
+        border: 5px solid gray;
+        /* margin-right: auto 會把右邊推開，若要完全對齊，建議移除或統一 */
+        background-color: aqua;
+    }
+
+    /* 第一排右側：寬度 20% */
+    .d {
+        width: 20%;
+        height: 450px;
+        padding: 10px;
+        border: 5px solid red;
+        /* margin-left: auto 會把左邊推開 */
+        background-color: bisque;
+    }
+
+    /* 第二排左側：寬度 20%，對應第一排的 80% 下方 */
+    .e {
+        width: 20%;
+        height: 450px;
+        padding: 10px;
+        border: 5px solid gray;
+        background-color: aqua;
+    }
+
+    /* 第二排右側：寬度 80%，對應第一排的 20% 下方 */
+    .f {
+        width: 80%;
+        height: 450px;
+        padding: 10px;
+        border: 5px solid red;
+        background-color: bisque;
+        position: ;
+    }
+
+    /* 
+       💡 對齊小筆記：
+       1. 因為你的 border 是 5px，如果不加 box-sizing: border-box，
+          寬度會變成 80% + 10px，這就是為什麼上下會對不齊的原因。
+       2. .w 之間如果不想要有垂直空白，記得不要在 HTML 放 <br>。
+    */
+    .f img {
+     
+    }
+</style>
+
+<body>
+    <H1>LET it go</H1>
+
+    <!-- 第一排容器 -->
+    <div class="w">
+        <!-- 格子 C (80%) -->
+        <div class="c">
+            <p class="box">
+                Lorem ipsum dolor sit amet...
+            </p>
+        </div>
+
+        <!-- 格子 D (20%) -->
+        <div class="d">
+            <p class="box">
+                Lorem ipsum dolor sit amet...
+            </p>
+        </div>
+    </div>
+    
+    <!-- 第二排容器 -->
+    <div class="w">
+        <!-- 格子 E (20%) -->
+        <div class="e">
+            <p class="box">
+                Lorem ipsum dolor sit amet...
+            </p>
+        </div>
+
+        <!-- 格子 F (80%) -->
+        <div class="f">
+            <p class="box">
+                <img src="./page/4536371-pika.jpg" alt="" style="width:50%;height: 50%;">
+               
+            </p>
+        </div>
+    </div>
+    
+</body>
+</html>

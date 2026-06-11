@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>生字小老師 - 筆順直顯版</title>
+    <!-- 載入筆順外掛程式 -->
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+    <style>
+        :root { --book-red: #d32f2f; --paper-yellow: #fffcf0; }
+        body { font-family: "標楷體", "DFKai-SB", serif; background-color: #e0e0e0; padding: 20px; }
+        
+        .notebook { 
+            max-width: 450px; margin: auto; background: var(--paper-yellow); 
+            padding: 25px; border-radius: 10px; border: 3px solid #555;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .search-area { display: flex; gap: 8px; margin-bottom: 20px; }
+        input { flex: 1; padding: 12px; font-size: 20px; border: 2px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 15px; background: var(--book-red); color: white; border: none; border-radius: 5px; cursor: pointer; }
+
+        /* 筆順顯示區 */
+        #target-word { 
+            width: 150px; height: 150px; border: 2px solid var(--book-red); 
+            margin: 10px auto; background-color: white;
+            /* 米字格背景 */
+            background-image: 
+                linear-gradient(var(--book-red) 1px, transparent 1px), 
+                linear-gradient(90deg, var(--book-red) 1px, transparent 1px),
+                linear-gradient(45deg, transparent 49%, var(--book-red) 1px, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, var(--book-red) 1px, transparent 51%);
+            background-size: 100% 50%, 50% 100%, 100% 100%, 100% 100%;
+        }
+
+        .action-btns { text-align: center; margin: 15px 0; }
+        .info-card { background: white; border-radius: 8px; padding: 15px; border: 1px solid #ddd; line-height: 1.8; }
+        .label { color: var(--book-red); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="notebook">
+    <h2 style="text-align:center; color:var(--book-red);">✏️ 動態筆順小老師</h2>
+    
+    <div class="search-area">
+        <input type="text" id="wordInput" placeholder="請輸入一個國字..." maxlength="1">
+        <button onclick="search()">查詢</button>
+    </div>
+
+    <div id="output" style="display:none;">
+        <div id="target-word"></div> <!-- 這裡會長出動畫生字 -->
+        
+        <div class="action-btns">
+            <button onclick="writer.animateCharacter()">▶️ 播放筆順</button>
+            <button style="background:#555;" onclick="writer.quiz()">📝 測驗寫法</button>
+            <button style="background:#1976d2;" onclick="speakCurrentWord()">🔊 讀音</button>
+        </div>
+
+        <div class="info-card" id="detail-box"></div>
+    </div>
+</div>
+
+<script>
+    const myWords = {
+        "學": { zy: "ㄒㄩㄝˊ", bs: "子部", note: "效法、鑽研知識。" },
+        "書": { zy: "ㄕㄨ", bs: "曰部", note: "裝訂成冊的著作。" },
+        "我": { zy: "ㄨㄛˇ", bs: "戈部", note: "自稱。指說話的人自己。" }
+    };
+
+    let writer; // 用來儲存 HanziWriter 物件
+    let currentWord = "";
+
+    function search() {
+        const char = document.getElementById('wordInput').value.trim();
+        const data = myWords[char];
+
+        if (!char) return;
+
+        // 顯示輸出區域
+        document.getElementById('output').style.display = 'block';
+        currentWord = char;
+
+        // 1. 清除舊的字，建立新的筆順動畫
+        document.getElementById('target-word').innerHTML = "";
+        writer = HanziWriter.create('target-word', char, {
+            width: 150,
+            height: 150,
+            padding: 5,
+            strokeAnimationSpeed: 1, // 播放速度
+            delayBetweenStrokes: 200, // 每一筆畫間隔
+            strokeColor: '#333' // 筆畫顏色
+        });
+        writer.animateCharacter(); // 自動播一遍
+
+        // 2. 更新文字資訊
+        const detailBox = document.getElementById('detail-box');
+        if (data) {
+            detailBox.innerHTML = `<div><span class="label">注音：</span>${data.zy}</div>
+                                   <div><span class="label">部首：</span>${data.bs}</div>
+                                   <div><span class="label">解釋：</span>${data.note}</div>`;
+        } else {
+            detailBox.innerHTML = "<div><i>字典尚未收錄解釋，但仍可看筆順。</i></div>";
+        }
+        
+        speak(char);
+    }
+
+    function speak(txt) {
+        const u = new SpeechSynthesisUtterance(txt);
+        u.lang = 'zh-TW';
+        u.rate = 0.7;
+        window.speechSynthesis.speak(u);
+    }
+
+    function speakCurrentWord() {
+        if (currentWord) speak(currentWord);
+    }
+</script>
+
+</body>
+</html>

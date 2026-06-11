@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>圖片分割排版</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 1000px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+            border: 1px solid transparent;
+        }
+        td {
+            height: 200px;
+            /*
+            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200');
+            */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .table1 { border: 1px solid red; }
+        .table2 { border: 1px solid blue; }
+        .table3 { border: 1px solid brown; }
+        .table4 { border: 1px solid blue; }
+        .table2 td,
+        .table4 td {
+            height: 200px;
+        }
+        .table3 td {
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <table class="table1">
+            <tr>
+                <td style="background-image: url('01.png');"></td>
+            </tr>
+        </table>
+
+        <table class="table2">
+            <tr>
+                <td width="50%" style="background-image: url('02.png');"></td>
+                <td width="50%" style="background-image: url('03.png');"></td>
+            </tr>
+        </table>
+
+        <table class="table3">
+            <tr>
+                <td width="33.33%" style="background-image: url('04.png');"></td>
+                <td width="33.33%" style="background-image: url('05.png');"></td>
+                <td width="33.34%" style="background-image: url('06.png');"></td>
+            </tr>
+        </table>
+
+        <table class="table4">
+            <tr>
+                <td width="50%" style="background-image: url('07.png');"></td>
+                <td width="50%" style="background-image: url('08.png');"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

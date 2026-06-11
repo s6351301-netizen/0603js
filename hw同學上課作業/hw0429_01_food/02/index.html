@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每綠鮮-美麗先</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .food-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: fadeInUp 0.6s ease-out;
+            cursor: pointer;
+        }
+        
+        .food-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        
+        .food-card-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+        
+        .food-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .food-card:hover .food-card-image img {
+            transform: scale(1.1);
+        }
+        
+        .food-card-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .food-card-content h3 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 12px;
+        }
+        
+        .food-card-content p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .food-card a {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .food-card a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .button-group a {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 60px;
+            opacity: 0.8;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            
+            .food-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍽️ 每綠鮮=美麗先</h1>
+            <p><a href="https://www.travel.taipei/zh-tw/pictorial/article/66990" target="_blank">永續美食之都(台北畫刊115年3月)</a></p>
+        </header>
+        
+        <div class="food-grid">
+            <div class="food-card">
+                <div class="food-card-image">
+                    <img src="./images/image_01.png" alt="美食1">
+                </div>
+                <div class="food-card-content">
+                    <h3>JIAMI呷米友善餐廳<br> 綠鮮午仔魚</h3>
+                    <p>選用符合責任漁業要求的午仔魚入饌</p>
+                    <div class="button-group">
+                        <a href="./page/page1.html">瞭解更多</a>
+                        <a href="https://www.google.com/maps/search/100%20%E8%87%BA%E5%8C%97%E5%B8%82%E4%B8%AD%E6%AD%A3%E5%8D%80%E9%87%8D%E6%85%B6%E5%8D%97%E8%B7%AF%E4%B8%80%E6%AE%B5%2047%20%E8%99%9F%201%20%E6%A8%93" target="_blank" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);">地圖</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="food-card">
+                <div class="food-card-image">
+                    <img src="./images/image_02.png" alt="美食2">
+                </div>
+                <div class="food-card-content">
+                    <h3>茶苑<br> 千層酥味噌烤豆腐</h3>
+                    <p>以派皮和豆腐製作的綠色創意餐點</p>
+                    <div class="button-group">
+                        <a href="./page/page2.html">瞭解更多</a>
+                        <a href="https://www.google.com/maps/search/%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80%E6%9D%BE%E5%A3%BD%E8%B7%AF%202%20%E8%99%9F%202F" target="_blank" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);">地圖</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="food-card">
+                <div class="food-card-image">
+                    <img src="./images/image_03.png" alt="美食3">
+                </div>
+                <div class="food-card-content">
+                    <h3>Timama kitchen<br>戰斧豬排</h3>
+                    <p>選用友善飼養肉品與小農蔬菜</p>
+                    <div class="button-group">
+                        <a href="./page/page3.html">瞭解更多</a>
+                        <a href="https://www.google.com/maps/search/114%20%E8%87%BA%E5%8C%97%E5%B8%82%E5%85%A7%E6%B9%96%E5%8D%80%E6%B1%9F%E5%8D%97%E8%A1%97%2071%20%E5%B7%B7%2016%20%E5%BC%84%2032%20%E8%99%9F" target="_blank" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);">地圖</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="food-card">
+                <div class="food-card-image">
+                    <img src="./images/image_04.png" alt="美食4">
+                </div>
+                <div class="food-card-content">
+                    <h3>泔米食堂<br>醉在地套餐</h3>
+                    <p>百分百選用台灣在地食材與生態水產</p>
+                    <div class="button-group">
+                        <a href="./page/page4.html">瞭解更多</a>
+                        <a href="https://www.google.com/maps/search/106%20%E8%87%BA%E5%8C%97%E5%B8%82%E5%A4%A7%E5%AE%89%E5%8D%80%E5%92%8C%E5%B9%B3%E6%9D%B1%E8%B7%AF%E4%BA%8C%E6%AE%B5%20175%20%E5%B7%B7%2012%20%E8%99%9F" target="_blank" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);">地圖</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2026 美食介紹網站 - 享受每一刻美味時光</p>
+        </footer>
+    </div>
+</body>
+</html>

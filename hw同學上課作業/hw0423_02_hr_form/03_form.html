@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Form表單練習</title>
+  <style>
+    body {
+            background-image: url('https://pixabay.com/images/download/brisch27-cat-4813099_1920.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
+    }
+    fieldset {
+      width: 50%;
+      margin: auto;
+      font-size: 30px;
+      padding: 40px 60px;
+      text-align: left;
+    }
+
+    h2 {
+      font-size: 60px;
+      text-align: center;
+      color: blueviolet;
+    }
+
+
+    fieldset p {
+      text-align: left;
+      margin-bottom: 25px;
+    }
+
+    input,
+    textarea {
+      font-size: 30px;
+      padding: 10px;
+      border-radius: 8px;
+      width: auto;
+    }
+
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      transform: scale(2.5);
+      margin: 0 15px 0 10px;
+      vertical-align: middle;
+    }
+
+
+    textarea {
+      width: 90%;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Form表單練習</h2>
+  <form action="">
+    <fieldset>
+      <legend>個人資料</legend>
+      <P>
+        <label for="name">姓名</label>
+        <input type="text" id="name" name="name" placeholder="請輸入姓名">
+      </P>
+
+      <P>
+        <label for="pwd">密碼</label>
+        <input type="password" id="pwd" name="pwd" placeholder="請輸入密碼">
+      </P>
+      <P>
+        <label for="count">數字</label>
+        <input type="number" id="count" name="count" placeholder="請輸入數字" min="1" max="100" style="width: 22%;">
+      </P>
+
+      <P>
+        <label for="date">日期</label>
+        <input type="date" id="date" name="date" style="width: 22%;">
+      </p>
+      <p>
+        <label for="sex">性別</label>
+        <input type="radio" id="boy" name="sex" value="男">男
+        <input type="radio" id="girl" name="sex" value="女">女
+      </p>
+      <p>
+        <label for="class">班級</label><br>
+        <input type="checkbox" id="class1" name="class" value="全端班">全端班
+        <input type="checkbox" id="class2" name="class" value="前端班">前端班
+        <input type="checkbox" id="class3" name="class" value="後端班">後端班
+      </p>
+      <p>
+        <label for="upload"></label>
+        <input type="file" id="upload" name="upload">
+      </p>
+      <p>
+        <label for="PS">備註</label><br>
+        <textarea name="PS" id="PS" cols="100" rows="10" placeholder="請輸入備註"></textarea>
+      </p>
+      <p>
+        <input type="submit" value="送出">
+      </p>
+    </fieldset>
+  </form>
+
+</body>
+
+</html>

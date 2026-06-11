@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>和風典雅科學計算機</title>
+    <style>
+        /* 全域背景：和紙紋理 */
+        body {
+            background-color: #f2ebe3;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "PingFang TC", "Noto Serif TC", serif;
+        }
+
+        /* 計算機主體：漆器質感外殼 */
+        .calculator {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            width: 700px;
+            /* 寬度配合圖片多欄設計 */
+            border: 3px solid #b33939;
+            /* 朱紅邊框 */
+            position: relative;
+        }
+
+        /* 頂部標籤列 (對應圖片 主要/abc/功能) */
+        .tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+        }
+
+        .tab {
+            color: #d1ccc0;
+            font-size: 0.9rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            opacity: 1;
+            color: #d4af37;
+            /* 金箔色 */
+            border-bottom: 2px solid #d4af37;
+        }
+
+        /* 螢幕：高級宣紙感 */
+        .display-container {
+            margin-bottom: 20px;
+        }
+
+        .display {
+            width: 100%;
+            height: 70px;
+            background: #fdfdf5;
+            border: 2px solid #d4af37;
+            border-radius: 5px;
+            text-align: left;
+            padding: 15px;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        /* 總按鍵佈局 */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 3fr 3fr 2fr;
+            /* 左:中:右 */
+            gap: 15px;
+        }
+
+        /* 每一小區的按鈕網格 */
+        .sub-grid {
+            display: grid;
+            gap: 8px;
+        }
+
+        .func-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* 左側功能區 */
+        .num-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* 中間數字區 */
+        .op-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* 右側運算區 */
+
+        /* 按鈕基本樣式 */
+        .btn {
+            height: 55px;
+            background: #262626;
+            border: 1px solid #3d3d3d;
+            border-radius: 4px;
+            color: #d1ccc0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn:hover {
+            background: #333;
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+
+        /* 特殊按鈕樣式 */
+        .btn-num {
+            background: #333;
+            color: #fff;
+        }
+
+        /* 數字按鈕稍微亮一點 */
+
+        .btn-op {
+            background: #2d3436;
+            color: #d4af37;
+        }
+
+        /* 運算符 */
+
+        .btn-enter {
+            background: #40407a;
+            /* 桔梗色 (對應圖片藍色按鈕) */
+            color: white;
+            grid-column: span 2;
+            /* 橫跨兩欄 */
+            font-weight: bold;
+        }
+
+        .btn-clear {
+            background: #b33939;
+            color: white;
+        }
+
+        /* 朱紅清除鍵 */
+
+        .label-jp {
+            font-size: 0.65rem;
+            display: block;
+            opacity: 0.6;
+            margin-bottom: 2px;
+        }
+
+        .btn-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <div class="tabs">
+            <div class="tab active">主要</div>
+            <div class="tab">abc</div>
+            <div class="tab">功能</div>
+        </div>
+
+        <div class="display-container">
+            <input type="text" class="display" id="screen" readonly value="0">
+        </div>
+
+        <div class="main-grid">
+            <!-- 左側：科學功能區 (a², sin, cos 等) -->
+            <div class="sub-grid func-grid">
+                <button class="btn" onclick="scientific('pow')">a²</button>
+                <button class="btn" onclick="scientific('exp')">a<sup>b</sup></button>
+                <button class="btn" onclick="append('|x|')">|a|</button>
+
+                <button class="btn" onclick="scientific('sqrt')">√</button>
+                <button class="btn" onclick="append('^')"><sup>n</sup>√</button>
+                <button class="btn" onclick="append('π')">π</button>
+
+                <button class="btn" onclick="append('sin(')">sin</button>
+                <button class="btn" onclick="append('cos(')">cos</button>
+                <button class="btn" onclick="append('tan(')">tan</button>
+
+                <button class="btn" onclick="append('(')">(</button>
+                <button class="btn" onclick="append(')')">)</button>
+                <button class="btn" onclick="append(',')">,</button>
+            </div>
+
+            <!-- 中間：數字鍵盤區 (電腦排列：123在下) -->
+            <div class="sub-grid num-grid">
+                <button class="btn btn-num" onclick="append('7')">7</button>
+                <button class="btn btn-num" onclick="append('8')">8</button>
+                <button class="btn btn-num" onclick="append('9')">9</button>
+
+                <button class="btn btn-num" onclick="append('4')">4</button>
+                <button class="btn btn-num" onclick="append('5')">5</button>
+                <button class="btn btn-num" onclick="append('6')">6</button>
+
+                <button class="btn btn-num" onclick="append('1')">1</button>
+                <button class="btn btn-num" onclick="append('2')">2</button>
+                <button class="btn btn-num" onclick="append('3')">3</button>
+
+                <button class="btn btn-num" onclick="append('0')">0</button>
+                <button class="btn btn-num" onclick="append('.')">.</button>
+                <button class="btn btn-num" onclick="append('ans')">ans</button>
+            </div>
+
+            <!-- 右側：運算鍵區 (+ - * / =) -->
+            <div class="sub-grid op-grid">
+                <button class="btn btn-op" onclick="append(' / ')">÷</button>
+                <button class="btn btn-op" onclick="append(' % ')">%</button>
+
+                <button class="btn btn-op" onclick="append(' * ')">×</button>
+                <button class="btn btn-clear" onclick="clearScreen()">C</button>
+
+                <button class="btn btn-op" onclick="append(' - ')">−</button>
+                <button class="btn btn-op" onclick="backspace()">←</button>
+
+                <button class="btn btn-op" onclick="append(' + ')">+</button>
+                <button class="btn btn-op" onclick="append('^')">^</button>
+
+                <button class="btn btn-enter" onclick="calculate()">↵</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const screen = document.getElementById('screen');
+        let lastResult = "";
+
+        function append(value) {
+            if (screen.value === '0' || screen.value === '不合算') {
+                screen.value = value;
+            } else {
+                screen.value += value;
+            }
+        }
+
+        function clearScreen() {
+            screen.value = '0';
+        }
+
+        function backspace() {
+            screen.value = screen.value.length > 1 ? screen.value.slice(0, -1) : "0";
+        }
+
+        function calculate() {
+            try {
+                let expression = screen.value
+                    .replace(/π/g, 'Math.PI')
+                    .replace(/sin\(/g, 'Math.sin(')
+                    .replace(/cos\(/g, 'Math.cos(')
+                    .replace(/tan\(/g, 'Math.tan(');
+
+                let result = eval(expression);
+                screen.value = Number.isInteger(result) ? result : result.toFixed(4);
+                lastResult = screen.value;
+            } catch (e) {
+                screen.value = '不合算';
+                setTimeout(clearScreen, 1500);
+            }
+        }
+
+        function scientific(type) {
+            if (type === 'pow') screen.value = Math.pow(parseFloat(screen.value), 2);
+            if (type === 'sqrt') screen.value = Math.sqrt(parseFloat(screen.value));
+        }
+    </script>
+
+</body>
+
+</html>

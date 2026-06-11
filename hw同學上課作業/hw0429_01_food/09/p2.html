@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鐵板劇場 - 極境</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f4f4f4;
+            font-family: "Microsoft JhengHei", sans-serif;
+            margin: 0;
+        }
+
+        .hero-banner {
+            height: 40vh;
+            background: url('https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?q=80&w=1600&auto=format&fit=crop') center/cover;
+            position: relative;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 60px 10%;
+            gap: 40px;
+        }
+
+        .text-box {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .text-box h2 {
+            color: #d4af37;
+            font-size: 2.5rem;
+            margin-top: 0;
+        }
+
+        .text-box p {
+            line-height: 2;
+            color: #ccc;
+        }
+
+        .img-box {
+            flex: 1;
+            min-width: 300px;
+            border: 1px solid #d4af37;
+            padding: 10px;
+        }
+
+        .img-box img {
+            width: 100%;
+            display: block;
+            filter: grayscale(20%);
+            transition: 0.5s;
+        }
+
+        .img-box:hover img {
+            filter: grayscale(0%);
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            color: #d4af37;
+            text-decoration: none;
+            border-bottom: 1px solid #d4af37;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero-banner"></div>
+    <div class="content">
+        <div class="text-box">
+            <h2>職人舞台 | 鐵板劇場</h2>
+            <p>在「極境」，鐵板餐檯就是主廚的舞台。每一次鏟青的交響，每一道火焰的躍動，都是為了喚醒食材靈魂的最深處。我們不僅招待您的味蕾，更要給您一場震撼感官的現場演出。</p>
+            <a href="../index.html" class="back-btn">← 返回品牌故事</a>
+        </div>
+        <div class="img-box">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop"
+                alt="鐵板現場">
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body { padding: 20px; font-family: sans-serif; }
+
+  /* Table 基本設定 */
+  table {
+    width: 100%;
+    border-collapse: collapse; /* 合併邊框 */
+    table-layout: fixed;      /* 強制分配寬度 */
+    margin-bottom: 15px;
+  }
+
+  td {
+    height: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  /* 顏色設定 */
+  .blue-light { background-color: #A3D1E4; }
+  .pink       { background-color: #F9A8B3; }
+  .yellow     { background-color: #FFF9D4; }
+  .cyan       { background-color: #E0F7FA; }
+  .orange     { background-color: #FFAB85; }
+  .gray       { background-color: #D3D3D3; }
+  .red        { background-color: #F28B82; }
+  .blue       { background-color: #81C7F4; }
+</style>
+</head>
+<body>
+
+  <!-- 第一排：100% -->
+  <table>
+    <tr>
+      <td class="blue-light" style="width: 100%;">100%</td>
+    </tr>
+  </table>
+
+  <!-- 第二排：50% + 50% -->
+  <table>
+    <tr>
+      <td class="pink" style="width: 50%;">50%</td>
+      <td class="yellow" style="width: 50%;">50%</td>
+    </tr>
+  </table>
+
+  <!-- 第三排：20% + 60% + 20% -->
+  <table>
+    <tr>
+      <td class="yellow" style="width: 20%;">20%</td>
+      <td class="cyan" style="width: 60%;">60%</td>
+      <td class="orange" style="width: 20%;">20%</td>
+    </tr>
+  </table>
+
+  <!-- 第四排：25% x 4 -->
+  <table>
+    <tr>
+      <td class="gray" style="width: 25%;">25%</td>
+      <td class="red" style="width: 25%;">25%</td>
+      <td class="blue" style="width: 25%;">25%</td>
+      <td class="yellow" style="width: 25%;">25%</td>
+    </tr>
+  </table>
+
+</body>
+</html>

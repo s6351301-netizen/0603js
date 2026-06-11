@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 17 預覽展示</title>
+    <style>
+        /* 全域樣式設定 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 主容器表格 */
+        .layout-table {
+            width: 100%;
+            max-width: 1000px;
+            border-collapse: separate;
+            border-spacing: 16px;
+            /* 控制區塊間距 */
+            table-layout: fixed;
+            /* 強制欄位均分 */
+        }
+
+        /* 儲存格 (Box) 通用樣式 */
+        td {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            vertical-align: top;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        td:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 程式碼顯示區塊 */
+        .code-box {
+            background-color: #1d1d1f;
+            color: #79c0ff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            font-family: "SF Mono", "Monaco", "Courier New", monospace;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff7b72;
+            overflow-x: auto;
+        }
+
+        /* 圖片設定 */
+        .iphone-img {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+
+        /* 文字樣式階層 */
+        h1 {
+            font-size: 32px;
+            margin: 10px 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #000;
+        }
+
+        p {
+            font-size: 15px;
+            color: #6e6e73;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .tag {
+            color: #0066cc;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table class="layout-table">
+        <!-- 第一層：1 個 BOX (含圖片生成程式碼與主圖) -->
+        <tr>
+            <td colspan="12" style="background: linear-gradient(180deg, #fff 0%, #e8e8ed 100%);">
+                <span class="tag">未來，就在眼前</span>
+                <h1>iPhone 17 Pro</h1>
+
+                <!-- 顯示圖片的程式語言 -->
+                <div class="code-box">
+
+                </div>
+
+                <!-- 實際顯示 (此處 src 為示意，可更換為您的圖片路徑) -->
+                <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=600&auto=format&fit=crop"
+                    alt="iPhone 17 概念圖" class="iphone-img">
+                <p>搭載全新 A19 Pro 晶片，挑戰智慧型手機的效能極限。</p>
+            </td>
+        </tr>
+
+        <!-- 第二層：2 個 BOX -->
+        <tr>
+            <td colspan="6">
+                <h3>液態金屬邊框</h3>
+                <p>比鈦金屬更輕、更強，帶來前所未有的極致手感與防護力。</p>
+            </td>
+            <td colspan="6">
+                <h3>螢幕下 Face ID</h3>
+                <p>完美全螢幕體驗，讓動態島與科技融為一體，視覺更寬廣。</p>
+            </td>
+        </tr>
+
+        <!-- 第三層：3 個 BOX -->
+        <tr>
+            <td colspan="4">
+                <span class="tag">攝影</span>
+                <h3>四鏡頭系統</h3>
+                <p>支援 10 倍光學變焦。</p>
+            </td>
+            <td colspan="4">
+                <span class="tag">電力</span>
+                <h3>超長續航</h3>
+                <p>滿足連續 30 小時影片播放。</p>
+            </td>
+            <td colspan="4">
+                <span class="tag">傳輸</span>
+                <h3>USB-C 4</h3>
+                <p>高達 80Gbps 傳輸速率。</p>
+            </td>
+        </tr>
+
+        <!-- 第四層：4 個 BOX -->
+        <tr>
+            <td colspan="3">
+                <p><strong>顏色</strong></p>
+                <p>曜石黑、珍珠白</p>
+            </td>
+            <td colspan="3">
+                <p><strong>儲存</strong></p>
+                <p>最高 2TB</p>
+            </td>
+            <td colspan="3">
+                <p><strong>環保</strong></p>
+                <p>100% 再生材料</p>
+            </td>
+            <td colspan="3">
+                <p><strong>通訊</strong></p>
+                <p>支援衛星通話</p>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

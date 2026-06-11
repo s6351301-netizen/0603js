@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>華山 蜷川實花展 - 旅 の 記憶</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcf8f8;
+            --card-bg: #ffffff;
+            --accent-pink: #ffb6c1;
+            --accent-dusty: #e0b0b0;
+            --text-dark: #3a3a3a;
+            --text-muted: #777777;
+            --border-light: #f0f0f0;
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans TC', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 0;
+            padding-bottom: 80px;
+        }
+
+        /* --- 返回導航 --- */
+        .back-nav {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto 20px;
+        }
+
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: all 0.3s var(--ease);
+        }
+
+        .back-to-home:hover {
+            color: var(--accent-dusty);
+            transform: translateX(-5px);
+        }
+
+        /* --- 內容容器 --- */
+        .article-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+        }
+
+        /* 頂部大圖區 (蜷川實花視覺) */
+        .hero-image {
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 文章內容區 */
+        .article-content {
+            padding: 50px 60px;
+        }
+
+        .article-meta {
+            font-size: 0.8rem;
+            color: var(--accent-dusty);
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 2.2rem;
+            margin: 0 0 30px;
+            color: var(--text-dark);
+        }
+
+        .highlight-text {
+            color: var(--accent-dusty);
+            font-weight: 500;
+            border-bottom: 1px solid var(--accent-pink);
+            padding-bottom: 2px;
+        }
+
+        .main-text {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        /* 展覽重點區 */
+        .exhibit-highlights {
+            background-color: #fffafb;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .exhibit-highlights h3 {
+            font-size: 1.1rem;
+            margin-top: 0;
+            color: var(--accent-dusty);
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        /* 資訊小標籤 */
+        .info-box {
+            background-color: #fafafa;
+            border-left: 4px solid var(--accent-pink);
+            padding: 25px;
+            border-radius: 4px 12px 12px 4px;
+            margin-top: 50px;
+        }
+
+        .info-title {
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .info-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 35px;
+            background-color: var(--accent-dusty);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s var(--ease);
+        }
+
+        .action-btn:hover {
+            background-color: var(--accent-pink);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .article-content { padding: 30px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="back-nav">
+        <a href="../20260429_06_food.html" class="back-to-home">
+            <span class="arrow">←</span> BACK TO JOURNEY
+        </a>
+    </nav>
+
+    <main class="article-container">
+        <div class="hero-image">
+            <img src="./img/25.jpg" alt="華山蜷川實花展">
+        </div>
+
+        <div class="article-content">
+            <span class="article-meta">HUASHAN ‧ IMMERSIVE ART</span>
+            <h1>彼岸之光，此岸之影：蜷川實花的幻境世界</h1>
+            
+            <p class="main-text">
+                日本當代藝術攝影大師 <span class="highlight-text">蜷川實花</span> 睽違多年再度於台北華山文創園區舉辦大型個展。本次展覽不僅展示了她最具代表性的濃艷花卉攝影，更與科技藝術團隊 EiM 合作，構築出一個虛實交錯的沉浸式藝術空間。
+                <br><br>
+                走進展場，就像是墜入了一個無限延伸的感官夢境。數千條水晶串飾在光影中律動，繽紛的花海與全景影像交織，讓人分不清現實與虛擬的界線，深刻感受大師對生命瞬息與絢爛的獨特詮釋。
+            </p>
+
+            <div class="exhibit-highlights">
+                <h3>展覽三大亮點</h3>
+                <ul class="info-list">
+                    <li>✿ 海外最大規模沉浸式體驗</li>
+                    <li>✿ 720 度全景環繞視覺幻境</li>
+                    <li>✿ 結合立體裝置與數千朵盛開花卉</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <span class="info-title">展覽資訊</span>
+                <ul class="info-list">
+                    <li>📍 地點：華山 1914 文化創意產業園區 (東 2B、2C 館)</li>
+                    <li>📅 展覽期間：請依官方公告為準</li>
+                    <li>🎟️ 購票建議：可透過官方合作平台預約購票</li>
+                </ul>
+                <a href="https://www.huashan1914.com/w/huashan1914/exhibition_25121018071945425" target="_blank" class="action-btn">🌐 前往華山官網查看詳情</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

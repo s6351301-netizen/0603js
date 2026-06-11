@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>form表單</title>
+     <style>
+          /* 基礎全域設定 */
+          * {
+               box-sizing: border-box;
+               margin: 0;
+               padding: 0;
+               font-family: "Microsoft JhengHei", sans-serif;
+          }
+
+          body {
+               /* 背景改回純漸層 */
+               background: linear-gradient(120deg, #fff1eb 0%, #ace0f9 100%);
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               min-height: 100vh;
+               padding: 20px;
+          }
+
+          /* 兩張圖片的共同基礎樣式 */
+          .corner-img {
+               position: fixed;
+               bottom: 20px;
+               /* 固定在距離底部 20px */
+               width: 120px;
+               /* 圖片寬度 */
+               height: auto;
+               z-index: 100;
+               /* 確保在最上層 */
+               pointer-events: none;
+               mix-blend-mode: multiply;
+               /* 濾掉白色背景 */
+          }
+
+          /* 專門控制右邊的那張 */
+          .img-right {
+               right: 20px;
+               /* 靠右 20px */
+          }
+
+          /* 專門控制左邊的那張 */
+          .img-left {
+               left: 20px;
+               /* 靠左 20px */
+               /* 讓左邊的 Tom 鏡像翻轉，這樣他會看著表單中心，比較可愛 */
+               transform: scaleX(-1);
+          }
+
+          /* 表單卡片主體 */
+          .mini-form-card {
+               background: rgba(255, 255, 255, 0.9);
+               padding: 25px;
+               border-radius: 20px;
+               box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+               width: 350px;
+               backdrop-filter: blur(5px);
+               position: relative;
+               /* 確保表單層級 */
+               z-index: 10;
+          }
+
+          h3 {
+               text-align: left;
+               color: #ff9a9e;
+               margin-bottom: 20px;
+               font-size: 1.3rem;
+               letter-spacing: 1px;
+               border-left: 4px solid #ff9a9e;
+               padding-left: 10px;
+          }
+
+          fieldset {
+               border: none;
+               text-align: left;
+          }
+
+          legend {
+               color: #a18cd1;
+               font-weight: bold;
+               font-size: 14px;
+               margin-bottom: 10px;
+          }
+
+          p {
+               margin-bottom: 15px;
+               font-size: 13px;
+               color: #666;
+               line-height: 1.6;
+          }
+
+          input[type="text"],
+          input[type="number"],
+          input[type="date"],
+          select,
+          textarea {
+               width: 100%;
+               padding: 8px 12px;
+               margin-top: 5px;
+               border: 1px solid #fce4ec;
+               border-radius: 10px;
+               background: #fff;
+               outline: none;
+               transition: all 0.3s;
+               color: #555;
+          }
+
+          input:focus,
+          select:focus,
+          textarea:focus {
+               border-color: #ffb6c1;
+               box-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
+               background-color: #fff9fa;
+          }
+
+          input[type="file"] {
+               font-size: 11px;
+               margin-top: 5px;
+          }
+
+          input[type="radio"],
+          input[type="checkbox"] {
+               accent-color: #ff9a9e;
+               margin-right: 3px;
+               cursor: pointer;
+          }
+
+          label {
+               cursor: pointer;
+               margin-right: 8px;
+          }
+
+          input[type="submit"] {
+               width: 100%;
+               padding: 12px;
+               background: #ffb6c1;
+               border: none;
+               border-radius: 25px;
+               color: white;
+               font-weight: bold;
+               font-size: 15px;
+               cursor: pointer;
+               transition: 0.3s;
+               margin-top: 10px;
+               box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+          }
+
+          input[type="submit"]:hover {
+               background: #ff9a9e;
+               transform: scale(1.02);
+          }
+     </style>
+</head>
+
+<body>
+     <div class="mini-form-card">
+          <h3>資料架設</h3>
+
+          <form action="">
+               <fieldset>
+                    <legend>基本資料</legend>
+                    <p>請填寫以下基本資料：</p>
+
+                    <p>姓名：
+                         <input type="text" name="name" id="name" placeholder="請輸入姓名">
+                    </p>
+
+                    <p>電話：
+                         <input type="text" name="phone" id="phone" placeholder="請輸入電話">
+                    </p>
+
+                    <p>
+                         <label for="gender">性別</label>
+                         <input type="radio" name="gender" value="男" id="male">
+                         <label for="male">男</label>
+                         <input type="radio" name="gender" value="女" id="female">
+                         <label for="female">女</label>
+                         <input type="radio" name="gender" value="其他" id="other">
+                         <label for="other">保密</label>
+                    </p>
+
+                    <p>
+                         <label for="country">年齡</label>
+                         <input type="number" name="" id="count" min="1" max="120">
+                    </p>
+
+                    <p>
+                         <label for="birthdate">出生日期</label>
+                         <input type="date" name="birthdate" id="birthdate">
+                    </p>
+
+                    <p>
+                         <label for="hobby">興趣</label>
+                         <input type="checkbox" name="hobby" value="閱讀" id="reading">
+                         <label for="reading">閱讀</label>
+                         <input type="checkbox" name="hobby" value="運動" id="sports">
+                         <label for="sports">運動</label>
+                         <input type="checkbox" name="hobby" value="音樂" id="music">
+                         <label for="music">音樂</label>
+                         <input type="checkbox" name="hobby" value="其他" id="other">
+                         <label for="other">其他</label>
+                    </p>
+
+                    <p>
+                         <label for="city">居住城市</label>
+                         <select name="city" id="city">
+                              <option value="台北">台北</option>
+                              <option value="新北">新北</option>
+                              <option value="台中">台中</option>
+                              <option value="高雄">高雄</option>
+                         </select>
+                    </p>
+
+                    <p>
+                         <input type="file" name="" id="">
+                    </p>
+
+                    <p>
+                         <label for="message">留言</label><br>
+                         <textarea name="message" id="message" cols="30" rows="5" placeholder="請輸入留言"></textarea>
+                    </p>
+
+                    <p>
+                         <input type="submit" value="送出">
+                    </p>
+               </fieldset>
+          </form>
+     </div>
+
+     <!-- <img src="./tom.png" alt="右裝飾" class="corner-img img-right">
+
+    <img src="./tom.png" alt="左裝飾" class="corner-img img-left"> -->
+</body>
+
+</body>
+
+</html>

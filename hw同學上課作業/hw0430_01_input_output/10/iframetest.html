@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form {
+        text-align: center;
+    }
+
+    table {
+        /* border: 1px solid black; */
+        margin: 20px auto;
+    }
+
+    td {
+        text-align: center;
+        /* border: 1px solid black; */
+    }
+
+    body {
+        background-color: rgb(56, 166, 218);
+    }
+
+    iframe {
+        width: 1000px;
+        height: 300px;
+        border: 5px solid black;
+        filter: grayscale(80%);
+        /* 變灰色調，看起來比較高級 */
+        border: none;
+        /* 把原本醜醜的邊框去掉 */
+        border-radius: 30px;
+        /* 圓角 */
+        filter: sepia(50%);
+        /* 懷舊風格 */
+        filter: brightness(1.1);
+        /* 稍微調亮 */
+        transition: transform 0.3s, border-color 0.3s;
+        /* 平滑過渡動畫 */
+        border-radius: 15px;
+        /* 圓角，讓畫面變溫柔 */
+        box-shadow: 0 20px 40px rgba(185, 9, 9, 0.3);
+        /* 加上陰影，產生立體浮起來的感覺 */
+        box-shadow: 0 35px 45px rgba(0, 0, 0, 0.2);
+        /* 深邃的陰影感 */
+    }
+
+    /* 滑鼠移上去時，陰影變大，感覺像浮起來 */
+    iframe:hover {
+        transform: translateY(-50px);
+        /* 往上飄一點點 */
+        box-shadow: 0 30px 45px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+<body>
+    <form>
+        <input type="text" id="keyword" placeholder="輸入單字收尋...">
+        <input type="button" value="search" onclick="doSearch()">
+    </form>
+    <table>
+        <tr>
+            <td>
+                <iframe src="./content/pink.html" frameborder="0"></iframe>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td>
+                <iframe id="dict1" src="https://www.urbandictionary.com/" frameborder="0"></iframe>
+            </td>
+        </tr>
+        <br> <br>
+        <tr>
+            <td>
+                <iframe id="dict2" src="https://zh.wiktionary.org/" frameborder="0"></iframe>
+            </td>
+        </tr>
+        <br><br>
+        <tr>
+            <td>
+                <iframe id="dict2" src="./content/green.html" frameborder="0"></iframe>
+            </td>
+            <td>
+                <input type="button" value="皮卡丘">
+            </td>
+        </tr>
+    </table>
+    <script>
+        function doSearch() {
+            var word = document.getElementById('keyword').value;
+            if (word === "") {
+                alert("請輸入單字");
+                return;
+            }
+            // 這裡的 id 必須跟上面 iframe 的 id 一模一樣
+            document.getElementById('dict1').src = "https://www.urbandictionary.com/define.php?term=" + encodeURIComponent(word);
+            document.getElementById('dict2').src = "https://zh.wiktionary.org/wiki/" + encodeURIComponent(word);
+        }
+    </script>
+</body>
+
+</html>

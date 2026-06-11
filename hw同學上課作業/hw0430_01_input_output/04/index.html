@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>會員自動登入與廣告執行</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; margin: 0; }
+        /* 設定 iframe 的樣式 */
+        .full-iframe {
+            width: 80vw;    /* 視窗寬度的 80% */
+            height: 80vh;   /* 視窗高度的 80% */
+            border: 2px solid #ccc;
+            display: block;
+            margin: 20px 0;
+        }
+        table { border-collapse: collapse; width: 100%; max-width: 1800px; margin-bottom: 24px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div style="color: rgb(47, 0, 255); font-weight: bold;">
+        <h3>E元會員網頁，使用PHP程式自動登入帳號密碼...
+        <p style="color: red">注意：此程式僅供學習和測試使用，請勿用於非法用途。</p>
+        <button onclick="window.open('./login.php', '_blank')">點此按鈕,開啟執行,開新網頁顯示結果頁面(須等約1-2分鐘)</button>
+        </h3>
+        
+        <!-- 加入 class 控制尺寸 -->
+        <iframe src="https://www.emailcash.com.tw/Rewards/Survey.aspx" class="full-iframe" frameborder="0"></iframe>
+
+        
+        
+    </div>
+</body>
+</html>

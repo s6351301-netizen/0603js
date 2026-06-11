@@ -1,0 +1,420 @@
+/* 全局樣式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 50%, #fef3c7 100%);
+    color: #2d3748;
+    line-height: 1.8;
+    padding: 30px 20px;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    color: #059669;
+    font-size: 2.8rem;
+    margin: 50px 0 40px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h2 {
+    color: #047857;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #6ee7b7;
+}
+
+/* 首頁樣式 */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.nav-table tr {
+    height: auto;
+    text-align: center;
+}
+
+.nav-table td {
+    padding: 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.nav-table a {
+    display: inline-block;
+    padding: 18px 50px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 15px rgba(16, 185, 129, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.nav-table a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+/* 內容表格樣式 */
+.content-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+    background: transparent;
+}
+
+table th {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 28px 30px;
+    font-size: 1.6rem;
+    text-align: left;
+    font-weight: 700;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 6px 15px rgba(16, 185, 129, 0.25);
+    letter-spacing: 0.5px;
+}
+
+table tr {
+    border-bottom: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: table-row;
+}
+
+table tr:has(td) {
+    background: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+table tr:has(td):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.2);
+}
+
+table tr:hover {
+    background-color: #f0fff4;
+}
+
+table td {
+    padding: 30px;
+    vertical-align: middle;
+    line-height: 1.8;
+}
+
+table td:first-child {
+    width: 35%;
+}
+
+table td:last-child {
+    width: 65%;
+    color: #4a5568;
+    font-size: 1rem;
+    text-align: justify;
+    padding: 30px 35px;
+}
+
+/* 圖片容器 */
+.image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+table img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                filter 0.5s ease, 
+                box-shadow 0.5s ease;
+    cursor: zoom-in;
+    border-radius: 10px;
+}
+
+table td:has(img):hover img {
+    transform: scale(1.15) rotate(0.5deg);
+    filter: brightness(1.05) contrast(1.05);
+}
+
+/* 圖片 Lightbox 功能 */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.3s ease;
+    overflow: hidden;
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-height: 85vh;
+    display: block;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+
+.lightbox-close:hover {
+    background: #f0fdf4;
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 回到首頁連結 */
+.back-link {
+    display: inline-block;
+    margin-top: 50px;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 15px rgba(14, 165, 233, 0.3);
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.back-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(14, 165, 233, 0.4);
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+        margin: 40px 0 30px;
+    }
+
+    body {
+        padding: 20px 15px;
+    }
+
+    table {
+        border-spacing: 0 15px;
+    }
+
+    table tr:has(td) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    table td {
+        width: 100% !important;
+        padding: 20px;
+    }
+
+    table td:first-child {
+        order: -1;
+        padding-bottom: 0;
+    }
+
+    table td:last-child {
+        padding-top: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .image-wrapper {
+        width: 100%;
+        height: 250px;
+        margin-bottom: 10px;
+    }
+
+    .nav-table a {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+    }
+}
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    table td:last-child {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    table td {
+        padding: 12px;
+    }
+
+    table th {
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+}
+
+/* 淡入淡出動畫 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+table tr {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+table tr:nth-child(1) { animation-delay: 0s; }
+table tr:nth-child(2) { animation-delay: 0.1s; }
+table tr:nth-child(3) { animation-delay: 0.2s; }
+table tr:nth-child(4) { animation-delay: 0.3s; }
+table tr:nth-child(5) { animation-delay: 0.4s; }
+table tr:nth-child(6) { animation-delay: 0.5s; }
+table tr:nth-child(7) { animation-delay: 0.6s; }
+table tr:nth-child(8) { animation-delay: 0.7s; }
+
+/* 圖片放大預覽 */
+.image-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.image-preview.active {
+    display: flex;
+}
+
+.image-preview img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.image-preview-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.image-preview-close:hover {
+    transform: scale(1.2);
+}

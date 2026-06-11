@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     核心：保證所有格子寬度精準
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    /* 全域設定：建議養成習慣加上 box-sizing，否則 border 會撐開寬度導致對不齊 */
+    h1 {
+        color: #4480b8;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    p {
+        color: #092379;
+        font-size: 24px;
+        /* 稍微調小，避免在 20% 寬度的格子中文字溢出 */
+        text-align: center;
+    }
+
+    /* .w 是父容器，控制裡面兩個子 div 的排列方式 */
+    .w {
+        display: flex;
+        /* 使用彈性佈局，讓子元素（div）並排 */
+        justify-content: center;
+        /* 讓內容在容器中水平置中 */
+        flex-wrap: nowrap;
+       
+    }
+    .c,
+    .d,
+    .f,
+    .g,
+    .e {
+        display: flex;
+        align-items: center;
+        /* 垂直居中 */
+        justify-content: center;
+        /* 水平居中 */
+        overflow: hidden;
+        /* 萬一有誤差，裁掉不准撐開格子 */
+    }
+    .c img,
+    .d img,
+    .f img,
+    .g img,
+    .e img {
+        max-width: 100%;
+        max-height: 400px;
+      object-fit: cover;
+      display: block; 
+    }
+</style>
+    
+<body>
+    <H1>LET it go</H1>
+
+    <!-- 第一排容器 -->
+    <div class="w">
+        <!-- 格子 C (80%) -->
+        <div class="c">
+            <p class="box">
+                <img src="./page/dj-pikachu-pikachu.gif" alt="" style="width: 80vh;">
+            </p>
+        </div>
+
+        <!-- 格子 D (20%) -->
+        <div class="d">
+            <p class="box">
+                <img src="./page/pikachu-pokemon.gif" alt="" style="width: 80vh;">
+            </p>
+        </div>
+    </div>
+
+    
+    <!-- 第二排容器 -->
+    <div class="w">
+        <!-- 格子 E (20%) -->
+        <div class="e">
+            <p class="box">
+                <img src="./page/4536371-pika.jpg" alt="">
+            </p>
+        </div>
+
+        <div class="f">
+            <p class="box">
+                <img src="./page/9da07580bb57155b343ee769b408bbed5c5fe546.jpg" alt="">
+
+            </p>
+        </div>
+        <div class="g">
+            <p class="box">
+                <img src="./page/image-23-10-1024x636.jpg" alt="">
+            </p>
+        </div>
+    </div>
+    <div class="h">
+        <p class="box">
+            <img src="./page/hq720.jpg" alt="">
+        </p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>區塊範例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+            align-content: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+            align-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        table {
+            width: 100%;
+            height: 10vh;
+        }
+
+        .box11 {
+            background-color: lightgreen;
+        }
+
+        .box21 {
+            background-color: lightpink;
+        }
+
+        .box22 {
+            background-color: lightblue;
+        }
+
+        .box31 {
+            background-color: lightcyan;
+        }
+
+        .box32 {
+            background-color: lightgray;
+        }
+
+        .box33 {
+            background-color: lightsalmon;
+        }
+
+        .box41{
+            background-color: lightseagreen;
+        }
+
+        .box42 {
+            background-color: lightskyblue;
+        }
+
+        .box43 {
+            background-color: lightslategray;
+        }
+
+        .box44 {
+            background-color: lightyellow;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <div class="container">
+            <a href="index.html" class="back-link">← 返回首頁</a>
+        </div>
+
+        <h1>區塊範例</h1>
+
+        <p>這是區塊範例。</p>
+
+        
+        <table>
+            <tr>
+                <td style="text-align: center;">
+                    <div class="box11" style="height: 100%; width: 100%"></div>
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td style="text-align: center;">
+                    <div class="box21" style="height: 100%; width: 100%"></div>
+                </td>
+                <td style="text-align: center;">
+                    <div class="box22" style="height: 100%; width: 100%"></div>
+                </td>
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <td style="width: 30%; text-align: center;">
+                    <div class="box31" class="box" style="height: 100%; width: 100%"></div>
+                </td>
+                <td style="width: 40%; text-align: center;">
+                    <div class="box32" class="box" style="height: 100%; width: 100%"></div>
+                </td>
+                <td style="width: 30%; text-align: center;">
+                    <div class="box33" class="box" style="height: 100%; width: 100%"></div>
+                </td>
+            </tr>
+        </table>
+        
+        <table>
+            <tr>
+                <td style="text-align: center;">
+                    <div class="box41" class="box" style="height: 100%; width: 100%"></div>
+                </td>
+                <td style="text-align: center;">
+                    <div class="box42" class="box" style="height: 100%; width: 100%"></div>
+                </td>
+                <td style="text-align: center;">
+                    <div class="box43" class="box" style="height: 100%; width: 100%"></div>
+                </td>
+                <td style="text-align: center;">
+                    <div class="box44" class="box" style="height: 100%; width: 100%"></div>
+                </td>
+            </tr>
+        </table>
+    
+    </body>
+</html>

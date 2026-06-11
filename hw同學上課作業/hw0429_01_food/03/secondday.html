@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二天 - 台南</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="content-container">
+        <h1>🎉 第二天 - 台南 🎉</h1>
+
+        <table>
+            <tr>
+                <th>🍜 勝利路古早味碗粿</th>
+            </tr>
+            <tr>
+                <td style="width: 300px; height: 220px;">
+                    <div class="image-wrapper">
+                        <img src="https://idt-backend.s3.amazonaws.com/8873/traditional-taiwanese-salty-rice-pudding-wa-gui-steamed-in-bowls.webp" alt="碗粿">
+                    </div>
+                </td>
+                <td>販售的碗粿共有四種口味，香菇碗粿、含肉碗粿、含蛋碗粿及素碗粿，另外還有味增湯，主打便宜好吃，是台南早餐的絕佳選擇。</td>
+            </tr>
+            <tr>
+                <th>🌿 四草綠色隧道</th>
+            </tr>
+            <tr>
+                <td style="width: 300px; height: 220px;">
+                    <div class="image-wrapper">
+                        <img src="https://www.4grass.com/warehouse/%7B303DC2B3-C13A-4185-9871-6D98870888A4%7D/38.jpg" alt="四草綠色隧道">
+                    </div>
+                </td>
+                <td>四草綠色隧道所指的是四草大眾廟後方排水道的紅樹林區，這條河道因兩側遍佈樹齡逾50年的原生紅樹林，自然形成一彎如隧道般的景象，號稱「迷你版亞馬遜森林」，同時也是臺灣唯一的水上綠色河道。</td>
+            </tr>
+            <tr>
+                <th>🥩 台南旗哥牛肉湯</th>
+            </tr>
+            <tr>
+                <td style="width: 300px; height: 220px;">
+                    <div class="image-wrapper">
+                        <img src="https://img.rabbitfunaround.com/2019/07/1564502639-512bb98657fdeeee5236287fb753fc8a.jpg" alt="牛肉湯">
+                    </div>
+                </td>
+                <td>旗哥牛肉湯使用當天現宰溫體牛肉，肉質鮮嫩，湯頭清甜，讓人一口接一口。點湯附送一碗牛肉燥飯。除了牛肉湯，店內還有其他美味選擇，如五花肉湯、牛肝湯、牛腩湯等。另外，還有各式熱炒、冷盤、滷味、炒麵及炒飯。</td>
+            </tr>
+            <tr>
+                <th>🎨 奇美博物館</th>
+            </tr>
+            <tr>
+                <td style="width: 300px; height: 220px;">
+                    <div class="image-wrapper">
+                        <img src="https://www.abic.com.tw/upload/chimeimuseum/01.jpg" alt="奇美博物館">
+                    </div>
+                </td>
+                <td>奇美博物館由台灣企業家「奇美集團創辦人」許文龍先生所設立，為全台最大的私人博物館，主要蒐藏有西洋藝術、樂器、兵器、自然史等。「西洋藝術」為該館一大特色，共分「藝術廳」、「雕塑大道」與「羅丹廳」三大展示主題。整體建築園區以西洋古典美學為風格，打造兼具景觀、休閒、無障礙的多元空間，為全台最美地標之一。</td>
+            </tr>
+            <tr>
+                <th>🏝️ 漁光島</th>
+            </tr>
+            <tr>
+                <td style="width: 300px; height: 220px;">
+                    <div class="image-wrapper">
+                        <img src="https://www.twtainan.net/Image/91908/?r=1658803414482" alt="漁光島">
+                    </div>
+                </td>
+                <td>漁光島，與熙來攘往的安平區僅隔一座漁光大橋相連，舊稱三鯤鯓。從前漁船在夜間點燈以吸引魚隻，遠望過去，漆黑的海上遍佈耀眼的漁光點點，因而得名「漁光島」。更有「漁火點點，半月沉江」的佳言美句流傳，遊客可漫步於沙灘，感受海風的親撫。</td>
+            </tr>
+        </table>
+
+        <br><br>
+        <a href="index.html" class="back-link">← 回到首頁</a>
+    </div>
+
+    <!-- 圖片放大 Modal -->
+    <div id="lightbox" class="lightbox-modal">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightbox-img" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // 圖片點擊放大功能
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const images = document.querySelectorAll('table img');
+
+        images.forEach(img => {
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                lightboxImg.src = this.src;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 點擊背景關閉
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // 按 ESC 鍵關閉
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+       
+</html>
